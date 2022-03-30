@@ -1,16 +1,14 @@
 import React from 'react';
 import './App.css';
-
+import {Header} from "./components/Header";
+import {Nav} from "./components/Nav";
+import {Profile} from "./components/Profile";
 function App() {
     return (
-        <div>
-            <header>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Playstation_logo_colour.svg" alt=""/>
-            </header>
-            <nav>
-                <div>Profile</div>
-            </nav>
-            <div>Main Content</div>
+        <div className='app-wrapper'>
+           <Header />
+           <Nav />
+           <Profile />
         </div>
     );
 }
