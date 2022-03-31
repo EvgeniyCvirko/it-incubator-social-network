@@ -9,7 +9,10 @@ export const MyPost = () =>{
         <div className='content'>
             <h2 className="title">My posts</h2>
             <Block />
-            <Post />
+            <Post message='Hey, why nobody love me?'
+                  count ={5}  />
+            <Post message='I want to be Front-end-Developer!!! '
+                  count ={500}  />
         </div>
     )
 }

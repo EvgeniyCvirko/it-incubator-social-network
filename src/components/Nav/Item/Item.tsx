@@ -1,10 +1,11 @@
 import React from 'react';
 import './Item.css';
 
-export const Item = () =>{
+
+export const Item = (props:any) =>{
     return(
             <div className='item'>
-                <a href="">Profile</a>
+                <a href="">{props.item}</a>
             </div>
     )
 }

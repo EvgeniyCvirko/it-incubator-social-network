@@ -5,11 +5,11 @@ import {Item} from "./Item/Item";
 export const Nav = () =>{
     return(
         <nav className='nav'>
-            <Item />
-            <Item />
-            <Item />
-            <Item />
-            <Item />
+            <Item item='Profile'/>
+            <Item item='Messages'/>
+            <Item item='News' />
+            <Item item='Music'/>
+            <Item item='Settings'/>
         </nav>
     )
 }
