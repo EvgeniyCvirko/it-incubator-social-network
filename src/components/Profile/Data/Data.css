@@ -1,0 +1,7 @@
+.data {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 2fr 10fr;
+    grid-template-columns: 2fr 10fr;
+    grid-template-areas: "a l";
+}

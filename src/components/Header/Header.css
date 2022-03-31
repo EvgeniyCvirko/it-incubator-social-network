@@ -1,0 +1,15 @@
+
+.header {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-area: h;
+    background-color: #79a753;
+}
+
+.header img {
+    margin: 5px 0 0 10px;
+    width: 80px;
+    height: 50px;
+    border-radius: 50%;
+}

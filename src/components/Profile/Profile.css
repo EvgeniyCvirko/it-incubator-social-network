@@ -1,0 +1,6 @@
+.content{
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    grid-area: c;
+    background-color: #b67718;
+}
