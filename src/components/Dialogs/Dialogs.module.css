@@ -1,27 +1,31 @@
-.dialogs{
-display: grid;
+.dialogs {
+    display: grid;
     -ms-grid-columns: 3fr 9fr;
     grid-template-columns: 3fr 9fr;
 }
-.dialogsItem{
 
-
-}
-.dialog {
+.dialogsItem {
     margin: 10px 10px 0px 15px;
     font-size: 18px;
 }
 
-.dialogsItem .active{
+.dialog:active {
+    color: gold;
+
+}
+
+.dialogsItem .active {
     color: gold;
     margin: 10px 10px 0px 15px;
     font-size: 23px;
 }
-.messages{
+
+.messages {
 
 }
-.message{
+
+.message {
     margin: 10px 10px 0px 5px;
-border: 2px solid white;
+    border: 2px solid white;
     border-radius: 3px;
 }
