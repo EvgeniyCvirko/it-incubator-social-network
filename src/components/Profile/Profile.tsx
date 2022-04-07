@@ -6,7 +6,7 @@ import {Data} from "./Data/Data";
 
 export const Profile = () =>{
     return(
-        <div className='content'>
+        <div >
             <Header />
             <Data />
             <MyPost />
