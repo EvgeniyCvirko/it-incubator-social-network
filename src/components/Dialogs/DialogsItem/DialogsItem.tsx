@@ -6,9 +6,7 @@ type DialogsItemPropsType={
      dialogsData: Array<DialogsDataType>,
 }
 
-
 export const DialogsItem = (props:DialogsItemPropsType) => {
-
     let dialog = props.dialogsData.map(e => {
         let path = '/dialogs/' + e.id
           return   < NavLink to = {path} className = {c.dialog} > {e.name}</NavLink>

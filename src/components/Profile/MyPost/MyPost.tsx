@@ -4,12 +4,6 @@ import {Block} from './Block/Block'
 import {Post,} from "./Post/Post";
 import {PostsType} from "../../../redux/state";
 
-/*export type MyPostPropsType = Array<PostPropsType>
-
-export type postPropsType = {
-    post:MyPostPropsType
-}*/
-
 type MyPostPropsType={
     post:  Array<PostsType>,
 }

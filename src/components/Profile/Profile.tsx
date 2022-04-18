@@ -3,7 +3,7 @@ import './Profile.css';
 import {Header} from './Header/Header';
 import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
-import {PostsType, ProfilePageType,} from "../../redux/state";
+import { ProfilePageType,} from "../../redux/state";
 
 
  type ProfilePropsType={
@@ -14,7 +14,6 @@ export const Profile = (props:ProfilePropsType) =>{
         <div >
             <Header />
             <Data />
-            {/*<MyPost post={props.post} />*/}
             <MyPost post={props.data.posts} />
         </div>
     )

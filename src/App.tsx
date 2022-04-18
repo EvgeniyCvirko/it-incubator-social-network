@@ -19,9 +19,7 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Nav/>
                 <div className='content'>
-                    {/*<Route path='/Dialogs' render={() => <Dialogs messagesData={props.messagesData} dialogsData={props.dialogsData}/>}/>*/}
                     <Route path='/Dialogs' render={() => <Dialogs data={props.state.dialogsPage}/>}/>
-                    {/*<Route path='/Profile' render={() => <Profile post={props.post}/>}/>*/}
                     <Route path='/Profile' render={() => <Profile data={props.state.profilePage}/>}/>
                 </div>
                 <Footer/>
