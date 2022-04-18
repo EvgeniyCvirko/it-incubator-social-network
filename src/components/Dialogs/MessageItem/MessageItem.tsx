@@ -1,11 +1,7 @@
 import c from "../Dialogs.module.css";
+import {MessagesData} from "../../../redux/state";
 export type MessageItemPropsType={
-    messagesData: Array<MessagesDataPropsType>
-}
-
-export type MessagesDataPropsType={
-    id: number,
-    message: string,
+    messagesData:Array<MessagesData>
 }
 
 export const MessageItem = (props:MessageItemPropsType) => {

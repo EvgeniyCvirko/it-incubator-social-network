@@ -1,14 +1,10 @@
 import c from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
+import {DialogsDataType} from "../../../redux/state";
 
-export type DialogsItemPropsType={
-    dialogsData: Array<DialogsDataPropsType>
+type DialogsItemPropsType={
+     dialogsData: Array<DialogsDataType>,
 }
-export type DialogsDataPropsType ={
-    id: number,
-    name: string,
-}
-
 
 
 export const DialogsItem = (props:DialogsItemPropsType) => {

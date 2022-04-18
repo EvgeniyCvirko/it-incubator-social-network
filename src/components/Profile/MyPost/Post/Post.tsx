@@ -1,7 +1,7 @@
 import React from 'react';
 import './Post.css';
 
-export type PostPropsType = {
+type PostPropsType = {
     id: string,
     message: string,
     count: number,

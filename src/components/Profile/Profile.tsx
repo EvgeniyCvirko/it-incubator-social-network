@@ -1,15 +1,21 @@
 import React from 'react';
 import './Profile.css';
 import {Header} from './Header/Header';
-import {MyPost,  postPropsType} from "./MyPost/MyPost";
+import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
+import {PostsType, ProfilePageType,} from "../../redux/state";
 
-export const Profile = (props:postPropsType) =>{
+
+ type ProfilePropsType={
+     data:ProfilePageType,
+ }
+export const Profile = (props:ProfilePropsType) =>{
     return(
         <div >
             <Header />
             <Data />
-            <MyPost post={props.post} />
+            {/*<MyPost post={props.post} />*/}
+            <MyPost post={props.data.posts} />
         </div>
     )
 }
