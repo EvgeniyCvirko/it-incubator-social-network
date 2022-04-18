@@ -2,23 +2,20 @@ import {v1} from "uuid";
 export type RootStateType={
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
+    sideBar: SideBarType,
 }
-
 export type ProfilePageType = {
     posts: Array<PostsType>
 }
-
 export type PostsType={
     id: string,
     message: string,
     count: number,
 }
-
 export type DialogsPageType={
     dialogsData: Array<DialogsDataType>,
     messagesData:Array<MessagesData>
 }
-
 export type DialogsDataType={
     id: number,
     name: string,
@@ -27,7 +24,18 @@ export type MessagesData={
     id: number,
     message: string,
 }
-
+export type SideBarType={
+    list: Array<List>,
+    friends: Array<Friends>,
+}
+export type List={
+    id: number,
+    namePage: string,
+}
+export type Friends={
+    avatar: string,
+    name: string,
+}
 export let state = {
     profilePage:{
         posts:[
@@ -51,6 +59,21 @@ export let state = {
             {id: 3, message: 'к Шире едешь?'},
             {id: 4, message: 'Да хз, завтра попиздим утром'},
             {id: 5, message: 'Знаешь, все будет хорошо!!!'},
+        ],
+    },
+    sideBar:{
+        list:[
+            {id: 1, namePage: 'Profile'},
+            {id: 2, namePage: 'Message'},
+            {id: 3, namePage: 'News'},
+            {id: 4, namePage: 'Music'},
+            {id: 5, namePage: 'Settings'},
+            {id: 5, namePage: 'Friends'},
+        ],
+        friends:[
+            { avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Sasha"},
+            { avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Victor"},
+            { avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Dima"},
         ],
     }
 }

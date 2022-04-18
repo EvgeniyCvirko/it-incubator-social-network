@@ -2,37 +2,24 @@ import React from 'react';
 import b from './Nav.module.css';
 import {Item} from "./Item/Item";
 import {NavLink} from "react-router-dom";
+import {SideBarType} from "../../redux/state";
 
+export type NavPropsType={
+    state: SideBarType,
+}
 
-
-
-
-export const Nav = () =>{
+export const Nav = (props: NavPropsType) =>{
+    let list = props.state.list.map( e =>{
+        let path = '/' + e.namePage;
+        return(
+            <div className={b.item}>
+                <NavLink to={path} activeClassName={b.active}>{e.namePage}</NavLink>
+            </div>
+        )
+    })
     return(
-        // <nav className='nav'>
-        //     <Item href='/profile' item='Profile'/>
-        //     <Item href='/dialogs' item='Messages'/>
-        //     <Item item='News' />
-        //     <Item item='Music'/>
-        //     <Item item='Settings'/>
-        // </nav>
         <nav>
-            <div className={b.item}>
-                <NavLink to='/profile' activeClassName={b.active}>Profile</NavLink>
-            </div>
-            <div className={b.item}>
-                <NavLink to='/dialogs'  activeClassName={b.active}>Message</NavLink>
-            </div>
-            <div className={b.item}>
-                <NavLink to='/news'  activeClassName={b.active}>News</NavLink>
-            </div>
-            <div className={b.item}>
-                <NavLink to='/music'  activeClassName={b.active}>Music</NavLink>
-            </div>
-            <div className={b.item}>
-                <NavLink to='/settings'  activeClassName={b.active}>Settings</NavLink>
-            </div>
-
+            {list}
         </nav>
     )
 }
