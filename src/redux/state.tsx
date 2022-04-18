@@ -68,7 +68,6 @@ export let state = {
             {id: 3, namePage: 'News'},
             {id: 4, namePage: 'Music'},
             {id: 5, namePage: 'Settings'},
-            {id: 5, namePage: 'Friends'},
         ],
         friends:[
             { avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Sasha"},
