@@ -1,15 +1,15 @@
 import React from 'react';
 import './Profile.css';
 import {Header} from './Header/Header';
-import {MyPost} from "./MyPost/MyPost";
+import {MyPost,  postPropsType} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
 
-export const Profile = () =>{
+export const Profile = (props:postPropsType) =>{
     return(
         <div >
             <Header />
             <Data />
-            <MyPost />
+            <MyPost post={props.post} />
         </div>
     )
 }

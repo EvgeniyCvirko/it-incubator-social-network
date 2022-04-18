@@ -7,7 +7,7 @@ export const Block = () =>{
         <div className='block'>
             <textarea >your news...</textarea>
             <div className="block_button">
-                <button className="button">Send</button>
+                <button className="button">Add Post</button>
             </div>
         </div>
     )

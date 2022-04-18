@@ -5,8 +5,9 @@
 }
 
 .dialogsItem {
-    margin: 10px 10px 0px 15px;
-    font-size: 18px;
+    width: 60px;
+    margin: 10px 55px 0px 15px;
+    font-size: 25px;
 }
 
 .dialog:active {

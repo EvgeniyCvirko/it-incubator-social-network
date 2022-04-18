@@ -1,9 +1,10 @@
 import React from 'react';
 import './Post.css';
 
-type PostPropsType = {
-    message: string
-    count: number
+export type PostPropsType = {
+    id: string,
+    message: string,
+    count: number,
 }
 
 export const Post = (props:PostPropsType) =>{
