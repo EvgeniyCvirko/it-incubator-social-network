@@ -9,10 +9,11 @@
     margin: 10px 55px 0px 15px;
     font-size: 25px;
 }
-
-.dialog:active {
+.name{
+    text-decoration: none;
+}
+.name:active {
     color: gold;
-
 }
 
 .dialogsItem .active {
@@ -21,10 +22,13 @@
     font-size: 23px;
 }
 
-.messages {
-
+.dialog {
+    width: 120px;
+    margin-bottom: 15px;
 }
-
+img{
+    width: 30px;
+}
 .message {
     margin: 10px 10px 0px 5px;
     border: 2px solid white;
