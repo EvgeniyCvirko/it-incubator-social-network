@@ -1,5 +1,5 @@
 import React from 'react';
-import './Friends.css';
+import s from './Friends.module.css';
 
 type FriendsPropsType={
     friend: Array<Friends>,
@@ -18,7 +18,7 @@ export const Friends = (props:FriendsPropsType) =>{
     })
     return(
             <div className='item'>
-                <h3>Friends</h3>
+                <h3 className={s.title}>Friends</h3>
                 {listFriends}
             </div>
     )

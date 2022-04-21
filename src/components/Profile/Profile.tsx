@@ -5,7 +5,6 @@ import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
 import { ProfilePageType,} from "../../redux/state";
 
-
  type ProfilePropsType={
      data:ProfilePageType,
  }
