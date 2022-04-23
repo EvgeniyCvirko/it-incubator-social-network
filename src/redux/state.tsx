@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {renderedComponent} from "../render";
 export type RootStateType={
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
@@ -75,4 +76,14 @@ export let state = {
             { avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Dima"},
         ],
     }
+}
+
+export const addPost = (post: string) =>{
+    let newPost={
+        id: v1(),
+        message: post,
+        count: 25,
+    }
+    state.profilePage.posts.push(newPost)
+    renderedComponent(state)
 }

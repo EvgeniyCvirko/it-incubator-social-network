@@ -3,7 +3,7 @@ import './Post.css';
 
 type PostPropsType = {
     id: string,
-    message: string,
+    message: string | undefined,
     count: number,
 }
 

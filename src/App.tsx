@@ -10,6 +10,7 @@ import {RootStateType} from "./redux/state";
 
 type AppPropsType={
     state: RootStateType,
+    addPost: (post: string)=> void,
 }
 
 function App(props: AppPropsType) {
@@ -20,7 +21,8 @@ function App(props: AppPropsType) {
                 <Nav state={props.state.sideBar} />
                 <div className='content'>
                     <Route path='/Message' render={() => <Dialogs data={props.state.dialogsPage}/>}/>
-                    <Route path='/Profile' render={() => <Profile data={props.state.profilePage}/>}/>
+                    <Route path='/Profile' render={() => <Profile data={props.state.profilePage}
+                                                                  addPost={props.addPost}/>}/>
                 </div>
                 <Footer/>
             </div>

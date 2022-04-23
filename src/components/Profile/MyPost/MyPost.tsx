@@ -6,6 +6,7 @@ import {PostsType} from "../../../redux/state";
 
 type MyPostPropsType={
     post:  Array<PostsType>,
+    addPost: (post: string)=> void,
 }
 
 export const MyPost = (props: MyPostPropsType) =>{
@@ -14,7 +15,7 @@ export const MyPost = (props: MyPostPropsType) =>{
     return(
         <div className='content'>
             <h2 className="title">My posts</h2>
-            <Block />
+            <Block  addPost={props.addPost}/>
             <div >{postElement}</div>
         </div>
     )
