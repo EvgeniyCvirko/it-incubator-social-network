@@ -1,27 +1,35 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent,KeyboardEvent} from 'react';
 import './Block.css';
 
-type BlockPropsType={
-    addPost: (post: string)=> void,
+type BlockPropsType = {
+    addPost: (post: string) => void
+    newPostText: string
+    updateNewPost: (newText : string) => void
 }
 
 
-export const Block = (props:BlockPropsType) =>{
-    // let textareaValue = React.createRef<HTMLTextAreaElement>()
-    const [post, setPost] = useState('')
-    const textareaValue = (e: ChangeEvent<HTMLTextAreaElement>)=>{
-        setPost(e.currentTarget.value);
-    }
+export const Block = (props: BlockPropsType) => {
+    let newPostElement = React.createRef<any>()
 
-     const addPostHandler = () => {
-        // let post = textareaValue.current?.value;
-       props.addPost(post)
-         setPost('')
-
+    const addPost = () => {
+        let text = newPostElement.current.value
+        props.addPost(text)
+        props.updateNewPost('')
     }
-    return(
+   const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+       props.updateNewPost(e.currentTarget.value)
+    }
+    const onKeyHandler = (e:KeyboardEvent<HTMLTextAreaElement>) =>{
+        if( e.ctrlKey){
+            addPost()
+        }
+    }
+    const addPostHandler = () => {
+        addPost()
+    }
+    return (
         <div className='block'>
-            <textarea value={post} onChange={textareaValue} >new post</textarea>
+            <textarea value={props.newPostText} onKeyPress={onKeyHandler} onChange={onChangeHandler} ref={newPostElement}/>
             <div className="block_button">
                 <button onClick={addPostHandler} className="button">Add Post</button>
             </div>

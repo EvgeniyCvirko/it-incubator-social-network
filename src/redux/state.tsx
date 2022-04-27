@@ -7,6 +7,7 @@ export type RootStateType={
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
+    newPostText:string
 }
 export type PostsType={
     id: string,
@@ -43,7 +44,8 @@ export let state = {
             {id: v1(), message: 'Hey, why nobody love me?', count: 100},
             {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
             {id: v1(), message: 'Ho-ho-ho', count: 50},
-        ]
+        ],
+        newPostText: 'it-camasutra!!!'
     },
     dialogsPage:{
         dialogsData:[
@@ -85,5 +87,10 @@ export const addPost = (post: string) =>{
         count: 25,
     }
     state.profilePage.posts.push(newPost)
+    renderedComponent(state)
+}
+export const updateNewPost = (newText: string) =>{
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    state.profilePage.newPostText = newText;
     renderedComponent(state)
 }
