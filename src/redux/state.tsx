@@ -16,14 +16,15 @@ export type PostsType={
 }
 export type DialogsPageType={
     dialogsData: Array<DialogsDataType>,
-    messagesData:Array<MessagesData>
+    messagesData:Array<MessagesData>,
+    newMessage: string,
 }
 export type DialogsDataType={
     id: number,
     name: string,
 }
 export type MessagesData={
-    id: number,
+    id: string,
     message: string,
 }
 export type SideBarType={
@@ -45,7 +46,7 @@ export let state = {
             {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
             {id: v1(), message: 'Ho-ho-ho', count: 50},
         ],
-        newPostText: 'it-camasutra!!!'
+        newPostText: 'add ctrl+Enter'
     },
     dialogsPage:{
         dialogsData:[
@@ -57,12 +58,13 @@ export let state = {
 
         ],
         messagesData : [
-            {id: 1, message: 'Сказали , что материал по-прежнему густой , но в обработке ведёт себя прекрасно'},
-            {id: 2, message: 'Помнишь к 7 на горского 56 острые козырьки?'},
-            {id: 3, message: 'к Шире едешь?'},
-            {id: 4, message: 'Да хз, завтра попиздим утром'},
-            {id: 5, message: 'Знаешь, все будет хорошо!!!'},
+            {id: v1(), message: 'Сказали , что материал по-прежнему густой , но в обработке ведёт себя прекрасно'},
+            {id: v1(), message: 'Помнишь к 7 на горского 56 острые козырьки?'},
+            {id: v1(), message: 'к Шире едешь?'},
+            {id: v1(), message: 'Да хз, завтра попиздим утром'},
+            {id: v1(), message: 'Знаешь, все будет хорошо!!!'},
         ],
+        newMessage : 'Ctrl+Enter add message'
     },
     sideBar:{
         list:[
@@ -92,5 +94,19 @@ export const addPost = (post: string) =>{
 export const updateNewPost = (newText: string) =>{
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     state.profilePage.newPostText = newText;
+    renderedComponent(state)
+}
+
+export const addMessage = (message: string) => {
+    let newMessage = {
+        id: v1(), message: message
+    }
+        state.dialogsPage.messagesData.push(newMessage)
+    renderedComponent(state)
+}
+
+export const updateMessage = (newMessage: string) =>{
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    state.dialogsPage.newMessage = newMessage;
     renderedComponent(state)
 }
