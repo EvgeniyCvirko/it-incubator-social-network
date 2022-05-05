@@ -6,8 +6,6 @@ import React, {ChangeEvent,KeyboardEvent} from "react";
 
 export type DialogsPropsType = {
     data: DialogsPageType
-    updateMessage: (newMessage: string) => void
-    addMessage: (message: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -15,12 +13,12 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     const addPostHandler = () => {
         let newMessage = textareaValue.current.value
-        props.addMessage(newMessage)
-        props.updateMessage('')
+        props.data.addMessage(newMessage)
+        props.data.updateMessage('')
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateMessage(e.currentTarget.value)
+        props.data.updateMessage(e.currentTarget.value)
     }
 
     const onKeyHandler = (e:KeyboardEvent<HTMLTextAreaElement>) => {

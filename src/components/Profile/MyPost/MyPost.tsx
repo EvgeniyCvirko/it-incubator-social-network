@@ -6,8 +6,6 @@ import { ProfilePageType} from "../../../redux/state";
 
 type MyPostPropsType={
     data:  ProfilePageType,
-    addPost: (post: string)=> void,
-    updateNewPost: (newText : string) => void
 }
 
 export const MyPost = (props: MyPostPropsType) =>{
@@ -16,9 +14,7 @@ export const MyPost = (props: MyPostPropsType) =>{
     return(
         <div className='content'>
             <h2 className="title">My posts</h2>
-            <Block  addPost={props.addPost}
-                    newPostText={props.data.newPostText}
-                    updateNewPost={props.updateNewPost}
+            <Block  data={props.data}
             />
             <div >{postElement}</div>
         </div>

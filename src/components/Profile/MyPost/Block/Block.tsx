@@ -1,10 +1,9 @@
 import React, {ChangeEvent,KeyboardEvent} from 'react';
 import './Block.css';
+import {ProfilePageType} from "../../../../redux/state";
 
 type BlockPropsType = {
-    addPost: (post: string) => void
-    newPostText: string
-    updateNewPost: (newText : string) => void
+    data:  ProfilePageType,
 }
 
 
@@ -13,11 +12,11 @@ export const Block = (props: BlockPropsType) => {
 
     const addPost = () => {
         let text = newPostElement.current.value
-        props.addPost(text)
-        props.updateNewPost('')
+        props.data.addPost(text)
+        props.data.updateNewPost('')
     }
    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       props.updateNewPost(e.currentTarget.value)
+       props.data.updateNewPost(e.currentTarget.value)
     }
     const onKeyHandler = (e:KeyboardEvent<HTMLTextAreaElement>) =>{
         if( e.ctrlKey){
@@ -29,7 +28,7 @@ export const Block = (props: BlockPropsType) => {
     }
     return (
         <div className='block'>
-            <textarea value={props.newPostText} onKeyPress={onKeyHandler} onChange={onChangeHandler} ref={newPostElement}/>
+            <textarea value={props.data.newPostText} onKeyPress={onKeyHandler} onChange={onChangeHandler} ref={newPostElement}/>
             <div className="block_button">
                 <button onClick={addPostHandler} className="button">Add Post</button>
             </div>

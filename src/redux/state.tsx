@@ -8,6 +8,8 @@ export type RootStateType={
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText:string
+    addPost: Function
+    updateNewPost: Function
 }
 export type PostsType={
     id: string,
@@ -18,6 +20,8 @@ export type DialogsPageType={
     dialogsData: Array<DialogsDataType>,
     messagesData:Array<MessagesData>,
     newMessage: string,
+    addMessage: Function,
+    updateMessage: Function,
 }
 export type DialogsDataType={
     id: number,
@@ -51,7 +55,21 @@ export let state = {
             {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
             {id: v1(), message: 'Ho-ho-ho', count: 50},
         ],
-        newPostText: 'add ctrl+Enter'
+        newPostText: 'add ctrl+Enter',
+        addPost(post: string) {
+            let newPost={
+                id: v1(),
+                message: post,
+                count: 25,
+            }
+            this.posts.push(newPost)
+            renderedComponent(state)
+        },
+        updateNewPost (newText: string){
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.newPostText = newText;
+            renderedComponent(state)
+        },
     },
     dialogsPage:{
         dialogsData:[
@@ -69,7 +87,19 @@ export let state = {
             {id: v1(), message: 'Да хз, завтра попиздим утром'},
             {id: v1(), message: 'Знаешь, все будет хорошо!!!'},
         ],
-        newMessage : 'Ctrl+Enter add message'
+        newMessage : 'Ctrl+Enter add message',
+        addMessage (message: string){
+            let newMessage = {
+                id: v1(), message: message
+            }
+            this.messagesData.push(newMessage)
+            renderedComponent(state)
+        },
+        updateMessage (newMessage: string){
+            // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+            this.newMessage = newMessage;
+            renderedComponent(state)
+        },
     },
     sideBar:{
         list:[
@@ -88,35 +118,6 @@ export let state = {
 }
 //@ts-ignore
 window.state=state;
-
-export const addPost = (post: string) =>{
-    let newPost={
-        id: v1(),
-        message: post,
-        count: 25,
-    }
-    state.profilePage.posts.push(newPost)
-    renderedComponent(state)
-}
-export const updateNewPost = (newText: string) =>{
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    state.profilePage.newPostText = newText;
-    renderedComponent(state)
-}
-
-export const addMessage = (message: string) => {
-    let newMessage = {
-        id: v1(), message: message
-    }
-        state.dialogsPage.messagesData.push(newMessage)
-    renderedComponent(state)
-}
-
-export const updateMessage = (newMessage: string) =>{
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    state.dialogsPage.newMessage = newMessage;
-    renderedComponent(state)
-}
 
 export const subscribe = (observer: any) => {
     renderedComponent = observer

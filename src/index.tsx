@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {addMessage, addPost, state, subscribe, updateMessage, updateNewPost} from './redux/state'
+import { state, subscribe,} from './redux/state'
 import {RootStateType} from "./redux/state";
 
 
@@ -10,12 +10,13 @@ let renderedComponent = (state: RootStateType) => {
     ReactDOM.render(
 
         <App state={state}
-                         addPost={addPost}
+                        /* addPost={addPost}
                          addMessage={addMessage}
                          updateNewPost={updateNewPost}
-                         updateMessage={updateMessage}
+                         updateMessage={updateMessage}*/
     />, document.getElementById('root'));
 }
 
 renderedComponent(state)
 subscribe(renderedComponent)
+
