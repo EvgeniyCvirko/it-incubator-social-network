@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {renderedComponent} from "../render";
+
 export type RootStateType={
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
@@ -39,6 +39,11 @@ export type Friends={
     avatar: string,
     name: string,
 }
+
+let renderedComponent = (state: RootStateType) => {
+    console.log(" state changed")
+}
+
 export let state = {
     profilePage:{
         posts:[
@@ -81,6 +86,8 @@ export let state = {
         ],
     }
 }
+//@ts-ignore
+window.state=state;
 
 export const addPost = (post: string) =>{
     let newPost={
@@ -109,4 +116,8 @@ export const updateMessage = (newMessage: string) =>{
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     state.dialogsPage.newMessage = newMessage;
     renderedComponent(state)
+}
+
+export const subscribe = (observer: any) => {
+    renderedComponent = observer
 }
