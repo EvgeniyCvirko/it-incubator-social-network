@@ -2,19 +2,25 @@ import React from 'react';
 import './MyPost.css';
 import {Block} from './Block/Block'
 import {Post,} from "./Post/Post";
-import { ProfilePageType} from "../../../redux/state";
+import { StoreType} from "../../../redux/state";
 
 type MyPostPropsType={
-    data:  ProfilePageType,
+    data:  StoreType,
 }
 
-export const MyPost = (props: MyPostPropsType) =>{
+export const MyPost : React.FC<MyPostPropsType> = ({data }) =>{
 
-    let postElement = props.data.posts.map(e => <Post id={e.id} message= {e.message} count={e.count}/>)
+    let postElement = data.getState().profilePage.posts.map(e => <Post id={e.id} message= {e.message} count={e.count}/>)
+    // @ts-ignore
+    // @ts-ignore
     return(
         <div className='content'>
             <h2 className="title">My posts</h2>
-            <Block  data={props.data}
+            <Block  newPostText={data.getState().profilePage.newPostText}
+                    addPost={data.addPost.bind(data)}
+                    updateNewPost={data.updateNewPost.bind(data)}
+
+
             />
             <div >{postElement}</div>
         </div>

@@ -1,41 +1,45 @@
 import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
-import { DialogsPageType} from "../../redux/state";
-import React, {ChangeEvent,KeyboardEvent} from "react";
+import {DialogsPageType} from "../../redux/state";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 
 export type DialogsPropsType = {
     data: DialogsPageType
+    addMessage:(message: string) => void
+    updateMessage:(newMessage: string) => void
 }
 
-export const Dialogs = (props: DialogsPropsType) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({data, addMessage,updateMessage,}) => {
     let textareaValue = React.createRef<any>();
 
     const addPostHandler = () => {
         let newMessage = textareaValue.current.value
-        props.data.addMessage(newMessage)
-        props.data.updateMessage('')
+        addMessage(newMessage)
+        updateMessage('')
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.data.updateMessage(e.currentTarget.value)
+        updateMessage(e.currentTarget.value)
     }
 
-    const onKeyHandler = (e:KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.ctrlKey){
+    const onKeyHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        console.log(e)
+        if (e.key === 'Enter') {
             addPostHandler()
         }
     }
 
     return (
         <div className={c.dialogs}>
-            <DialogsItem dialogsData={props.data.dialogsData}/>
+            <DialogsItem dialogsData={data.dialogsData}/>
             <div className={c.messages}>
-                <MessageItem messagesData={props.data.messagesData}/>
+                <MessageItem messagesData={data.messagesData}/>
                 <textarea className={c.textarea}
                           onKeyPress={onKeyHandler}
                           onChange={onChangeHandler}
-                          value={props.data.newMessage}
+                          value={data.newMessage}
+                          placeholder='Next string = ctrEnter'
                           ref={textareaValue}
                 />
                 <button onClick={addPostHandler} className={c.button}>add Post</button>

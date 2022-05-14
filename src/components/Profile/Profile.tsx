@@ -3,17 +3,18 @@ import './Profile.css';
 import {Header} from './Header/Header';
 import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
-import { ProfilePageType,} from "../../redux/state";
+import { StoreType,} from "../../redux/state";
 
  type ProfilePropsType={
-     data:ProfilePageType,
+     data:StoreType,
  }
-export const Profile = (props:ProfilePropsType) =>{
+export const Profile: React.FC<ProfilePropsType> = ({data }) =>{
     return(
         <div >
             <Header />
             <Data />
-            <MyPost data={props.data}
+            <MyPost data={data}
+
             />
         </div>
     )

@@ -1,22 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import { state, subscribe,} from './redux/state'
-import {RootStateType} from "./redux/state";
+import {App} from './App';
+import {store} from "./redux/state";
+import {BrowserRouter} from "react-router-dom";
 
 
-let renderedComponent = (state: RootStateType) => {
+let renderedComponent = () => {
     ReactDOM.render(
-
-        <App state={state}
-                        /* addPost={addPost}
-                         addMessage={addMessage}
-                         updateNewPost={updateNewPost}
-                         updateMessage={updateMessage}*/
-    />, document.getElementById('root'));
+        <BrowserRouter>
+            <App state={store}
+        /></BrowserRouter>,
+        document.getElementById('root'));
 }
 
-renderedComponent(state)
-subscribe(renderedComponent)
+renderedComponent()
+store.subscribe(renderedComponent)
 
