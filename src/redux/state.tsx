@@ -1,17 +1,17 @@
 import {v1} from "uuid";
 
-export type StoreType ={
-    _state:RootStateType
-    addPost:(post: string | undefined) => void,
-    updateNewPost:(newText: string) => void,
-    addMessage:(message: string) => void,
-    updateMessage:(newMessage: string) => void,
-    subscribe:(callback:() => void) => void,
-    dispatch:(action: any) => void,
-    _onChange:(_state:RootStateType) => void,
-    getState:() => RootStateType,
+export type StoreType = {
+    _state: RootStateType
+    addPost: (post: string | undefined) => void,
+    updateNewPost: (newText: string) => void,
+    addMessage: (message: string) => void,
+    updateMessage: (newMessage: string) => void,
+    subscribe: (callback: () => void) => void,
+    dispatch: (action: ActionType) => void,
+    _onChange: (_state: RootStateType) => void,
+    getState: () => RootStateType,
 }
-export type RootStateType={
+export type RootStateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
     sideBar: SideBarType,
@@ -19,44 +19,58 @@ export type RootStateType={
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText:string
+    newPostText: string
 }
-export type PostsType={
+export type PostsType = {
     id: string,
     message: string | undefined,
     count: number,
 }
-export type DialogsPageType={
+export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>,
-    messagesData:Array<MessagesData>,
+    messagesData: Array<MessagesData>,
     newMessage: string,
 }
-export type DialogsDataType={
+export type DialogsDataType = {
     id: number,
     name: string,
 }
-export type MessagesData={
+export type MessagesData = {
     id: string,
     message: string,
 }
-export type SideBarType={
+export type SideBarType = {
     list: Array<List>,
     friends: Array<Friends>,
 }
-export type List={
+export type List = {
     id: number,
     namePage: string,
 }
-export type Friends={
+export type Friends = {
     avatar: string,
     name: string,
 }
-export type ActionType={
+export type ActionType = AddPostActionType | UpdateNewPostActionType | AddMessageActionType | UpdateMessageActionType
 
+type AddPostActionType = {
+    type: "ADD_Post"
+    post: string | undefined
+}
+type UpdateNewPostActionType = {
+    type: "Update_New_Post"
+    newText: string
+}
+type AddMessageActionType = {
+    type: "Add_Message"
+    message: string
+}
+type UpdateMessageActionType = {
+    type: "Update_Message"
+    newMessage: string
 }
 
-
-export let store:StoreType = {
+export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -130,14 +144,40 @@ export let store:StoreType = {
     _onChange() {
         console.log(" state changed")
     },
-    dispatch(){
+    getState() {
+        return this._state;
+    },
+    dispatch(action) {
+        if (action.type === "ADD_Post") {
+            let newPost = {
+                id: v1(),
+                message: action.post,
+                count: 25,
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._onChange(this._state)
+        } else if (action.type === 'Update_New_Post') {
+            this._state.profilePage.newPostText = action.newText;
+            this._onChange(this._state)
+        } else if (action.type === 'Add_Message') {
+            let newMessage = {
+                id: v1(), message: action.message
+            }
+            this._state.dialogsPage.messagesData.push(newMessage)
+            this._onChange(this._state)
+        } else if (action.type === 'Update_Message') {
+            this._state.dialogsPage.newMessage = action.newMessage;
+            this._onChange(this._state)
+        }
 
     },
-    getState(){
-        return this._state;
+}
+export const addPostAC = (post: string | undefined) => {
+    return {
+        type: "ADD_Post",
+        post: post
     }
 }
-
 
 
 

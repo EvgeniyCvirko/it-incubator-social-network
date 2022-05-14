@@ -17,9 +17,7 @@ export const MyPost : React.FC<MyPostPropsType> = ({data }) =>{
         <div className='content'>
             <h2 className="title">My posts</h2>
             <Block  newPostText={data.getState().profilePage.newPostText}
-                    addPost={data.addPost.bind(data)}
-                    updateNewPost={data.updateNewPost.bind(data)}
-
+                    dispatch={data.dispatch.bind(data)}
 
             />
             <div >{postElement}</div>

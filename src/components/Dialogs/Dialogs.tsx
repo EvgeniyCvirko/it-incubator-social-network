@@ -1,32 +1,37 @@
 import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
-import {DialogsPageType} from "../../redux/state";
+import {ActionType, DialogsPageType} from "../../redux/state";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 
 export type DialogsPropsType = {
     data: DialogsPageType
-    addMessage:(message: string) => void
-    updateMessage:(newMessage: string) => void
+    dispatch:(action: ActionType) => void
+    /*addMessage:(message: string) => void
+    updateMessage:(newMessage: string) => void*/
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({data, addMessage,updateMessage,}) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({data, dispatch,}) => {
     let textareaValue = React.createRef<any>();
 
-    const addPostHandler = () => {
+    const addMessageHandler = () => {
         let newMessage = textareaValue.current.value
-        addMessage(newMessage)
-        updateMessage('')
+        // addMessage(newMessage)
+        dispatch({type:'Add_Message', message: newMessage})
+        // updateMessage('')
+        dispatch({type: 'Update_Message', newMessage: ''})
+
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateMessage(e.currentTarget.value)
+        // updateMessage(e.currentTarget.value)
+        dispatch({type: 'Update_Message', newMessage: e.currentTarget.value})
     }
 
     const onKeyHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         console.log(e)
         if (e.key === 'Enter') {
-            addPostHandler()
+            addMessageHandler()
         }
     }
 
@@ -42,7 +47,7 @@ export const Dialogs: React.FC<DialogsPropsType> = ({data, addMessage,updateMess
                           placeholder='Next string = ctrEnter'
                           ref={textareaValue}
                 />
-                <button onClick={addPostHandler} className={c.button}>add Post</button>
+                <button onClick={addMessageHandler} className={c.button}>add Message</button>
 
             </div>
 

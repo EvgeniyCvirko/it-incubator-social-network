@@ -20,8 +20,8 @@ export const App: React.FC<AppPropsType> = ({state,}) => {
             <Nav state={state.getState().sideBar}/>
             <div className='content'>
                 <Route path='/Message' render={() => <Dialogs data={state.getState().dialogsPage}
-                                                              addMessage={state.addMessage.bind(state)}
-                                                              updateMessage={state.updateMessage.bind(state)}
+                                                              dispatch={state.dispatch.bind(state)}
+
                 />}/>
                 <Route path='/Profile' render={() => <Profile data={state}
 
