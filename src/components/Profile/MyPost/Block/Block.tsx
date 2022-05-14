@@ -1,6 +1,6 @@
 import React, {ChangeEvent,KeyboardEvent} from 'react';
 import './Block.css';
-import {ActionType} from "../../../../redux/state";
+import {ActionType, addPostAC, UpdateNewPosAC} from "../../../../redux/state";
 
 type BlockPropsType = {
     newPostText:  string,
@@ -13,13 +13,10 @@ export const Block: React.FC <BlockPropsType> = ({newPostText, dispatch }) => {
 
     const addNewPost = () => {
         let text = newPostElement.current?.value
-        // addPost(text)
-        dispatch({type: 'ADD_Post', post: text})
-        // updateNewPost('')
-        dispatch ({type: 'Update_New_Post', newText: '' })
+        dispatch(addPostAC(text))
+        dispatch(UpdateNewPosAC(""))
     }
    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-       // updateNewPost(e.currentTarget.value)
        dispatch ({type: 'Update_New_Post', newText: e.currentTarget.value })
     }
     const onKeyHandler = (e:KeyboardEvent<HTMLTextAreaElement>) =>{

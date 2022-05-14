@@ -1,14 +1,12 @@
 import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
-import {ActionType, DialogsPageType} from "../../redux/state";
+import {ActionType, AddMessageAC, DialogsPageType, updateMessageAC} from "../../redux/state";
 import React, {ChangeEvent, KeyboardEvent} from "react";
 
 export type DialogsPropsType = {
     data: DialogsPageType
     dispatch:(action: ActionType) => void
-    /*addMessage:(message: string) => void
-    updateMessage:(newMessage: string) => void*/
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = ({data, dispatch,}) => {
@@ -16,16 +14,12 @@ export const Dialogs: React.FC<DialogsPropsType> = ({data, dispatch,}) => {
 
     const addMessageHandler = () => {
         let newMessage = textareaValue.current.value
-        // addMessage(newMessage)
-        dispatch({type:'Add_Message', message: newMessage})
-        // updateMessage('')
-        dispatch({type: 'Update_Message', newMessage: ''})
-
+        dispatch(AddMessageAC(newMessage))
+        dispatch(updateMessageAC(''))
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // updateMessage(e.currentTarget.value)
-        dispatch({type: 'Update_Message', newMessage: e.currentTarget.value})
+        dispatch(updateMessageAC(e.currentTarget.value))
     }
 
     const onKeyHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

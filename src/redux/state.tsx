@@ -51,24 +51,10 @@ export type Friends = {
     avatar: string,
     name: string,
 }
-export type ActionType = AddPostActionType | UpdateNewPostActionType | AddMessageActionType | UpdateMessageActionType
-
-type AddPostActionType = {
-    type: "ADD_Post"
-    post: string | undefined
-}
-type UpdateNewPostActionType = {
-    type: "Update_New_Post"
-    newText: string
-}
-type AddMessageActionType = {
-    type: "Add_Message"
-    message: string
-}
-type UpdateMessageActionType = {
-    type: "Update_Message"
-    newMessage: string
-}
+export type ActionType = ReturnType<typeof addPostAC> |
+                         ReturnType<typeof UpdateNewPosAC> |
+                         ReturnType<typeof AddMessageAC> |
+                         ReturnType<typeof updateMessageAC>
 
 export let store: StoreType = {
     _state: {
@@ -172,11 +158,30 @@ export let store: StoreType = {
 
     },
 }
-export const addPostAC = (post: string | undefined) => {
+
+export const addPostAC = (text: string | undefined) => {
     return {
         type: "ADD_Post",
-        post: post
-    }
+        post: text
+    } as const
+}
+export const UpdateNewPosAC = (newMessage: string) => {
+    return {
+        type: "Update_New_Post",
+        newText: newMessage
+    } as const
+}
+export const AddMessageAC = (message: string) => {
+    return {
+        type: "Add_Message",
+        message: message
+    } as const
+}
+export const updateMessageAC = (newMessage: string) => {
+    return {
+        type: "Update_Message",
+        newMessage: newMessage
+    } as const
 }
 
 
