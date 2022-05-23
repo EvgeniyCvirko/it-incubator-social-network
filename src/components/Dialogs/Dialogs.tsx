@@ -1,44 +1,42 @@
 import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
-import { AddMessageAC,  updateMessageAC} from "../../redux/DialoguesPageReducer";
 import React, {ChangeEvent, KeyboardEvent} from "react";
-import {ActionType, DialogsPageType} from "../../redux/store";
+import {DialogsPageType} from "../../redux/store";
 
 export type DialogsPropsType = {
-    data: DialogsPageType
-    dispatch:(action: ActionType) => void
+    updateMessage: (newMessage: string) => void
+    addMessage: (message: string) => void
+    items: DialogsPageType
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({data, dispatch,}) => {
+export const Dialogs = (props: DialogsPropsType) => {
     let textareaValue = React.createRef<any>();
 
     const addMessageHandler = () => {
         let newMessage = textareaValue.current.value
-        dispatch(AddMessageAC(newMessage))
-        dispatch(updateMessageAC(''))
+        props.addMessage(newMessage)
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateMessageAC(e.currentTarget.value))
+        props.updateMessage(e.currentTarget.value)
     }
 
     const onKeyHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        console.log(e)
         if (e.key === 'Enter') {
             addMessageHandler()
         }
     }
 
     return (
-        <div className={c.dialogs}>
-            <DialogsItem dialogsData={data.dialogsData}/>
+        <>
+            <DialogsItem dialogsData={props.items.dialogsData}/>
             <div className={c.messages}>
-                <MessageItem messagesData={data.messagesData}/>
+                <MessageItem messagesData={props.items.messagesData}/>
                 <textarea className={c.textarea}
                           onKeyPress={onKeyHandler}
                           onChange={onChangeHandler}
-                          value={data.newMessage}
+                          value={props.items.newMessage}
                           placeholder='Next string = ctrEnter'
                           ref={textareaValue}
                 />
@@ -46,6 +44,6 @@ export const Dialogs: React.FC<DialogsPropsType> = ({data, dispatch,}) => {
 
             </div>
 
-        </div>
+        </>
     )
 }
