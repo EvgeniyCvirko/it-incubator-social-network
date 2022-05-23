@@ -3,7 +3,7 @@ import './Profile.css';
 import {Header} from './Header/Header';
 import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
-import { StoreType,} from "../../redux/state";
+import { StoreType,} from "../../redux/store";
 
  type ProfilePropsType={
      data:StoreType,

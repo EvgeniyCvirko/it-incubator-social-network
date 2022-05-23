@@ -2,7 +2,7 @@ import React from 'react';
 import './MyPost.css';
 import {Block} from './Block/Block'
 import {Post,} from "./Post/Post";
-import { StoreType} from "../../../redux/state";
+import { StoreType} from "../../../redux/store";
 
 type MyPostPropsType={
     data:  StoreType,

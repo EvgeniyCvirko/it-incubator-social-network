@@ -1,6 +1,7 @@
 import React, {ChangeEvent,KeyboardEvent} from 'react';
 import './Block.css';
-import {ActionType, addPostAC, UpdateNewPosAC} from "../../../../redux/state";
+import {addPostAC, UpdateNewPosAC} from "../../../../redux/ProfilePageReducer";
+import {ActionType} from "../../../../redux/store";
 
 type BlockPropsType = {
     newPostText:  string,

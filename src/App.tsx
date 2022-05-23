@@ -6,7 +6,7 @@ import {Profile} from "./components/Profile/Profile";
 import {Footer} from "./components/Footer/Footer";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import { Route,} from "react-router-dom";
-import { StoreType,} from "./redux/state";
+import { StoreType,} from "./redux/store";
 
 type AppPropsType = {
     state: StoreType,

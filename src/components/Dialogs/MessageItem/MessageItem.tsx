@@ -1,5 +1,5 @@
 import c from "../Dialogs.module.css";
-import {MessagesData} from "../../../redux/state";
+import {MessagesData} from "../../../redux/store";
 export type MessageItemPropsType={
     messagesData:Array<MessagesData>
 }
