@@ -4,6 +4,7 @@ import {Header} from './Header/Header';
 import {MyPost,} from "./MyPost/MyPost";
 import {Data} from "./Data/Data";
 import { StoreType,} from "../../redux/store";
+import {MyPostContainer} from "./MyPost/MyPostContainer";
 
  type ProfilePropsType={
      data:StoreType,
@@ -13,7 +14,7 @@ export const Profile: React.FC<ProfilePropsType> = ({data }) =>{
         <div >
             <Header />
             <Data />
-            <MyPost data={data}
+            <MyPostContainer data={data}
 
             />
         </div>
