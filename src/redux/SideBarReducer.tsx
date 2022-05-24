@@ -1,4 +1,16 @@
-import {SideBarType} from "./store";
+
+export type SideBarType = {
+    list: Array<List>,
+    friends: Array<Friends>,
+}
+type List = {
+    id: number,
+    namePage: string,
+}
+type Friends = {
+    avatar: string,
+    name: string,
+}
 
 let initialState = {
     list: [
@@ -15,7 +27,7 @@ let initialState = {
     ],
 }
 
-export const sideBarReducer = (state: SideBarType = initialState, action: any ) => {
+export const sideBarReducer = (state: SideBarType = initialState, action: any ): SideBarType=> {
 
     return state;
 }

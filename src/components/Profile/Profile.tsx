@@ -2,11 +2,11 @@ import React from 'react';
 import './Profile.css';
 import {Header} from './Header/Header';
 import {Data} from "./Data/Data";
-import { StoreType,} from "../../redux/store";
 import {MyPostContainer} from "./MyPost/MyPostContainer";
+import {AppStateType} from "../../redux/redux_store";
 
  type ProfilePropsType={
-     data:StoreType,
+     data:AppStateType,
  }
 export const Profile: React.FC<ProfilePropsType> = ({data }) =>{
     return(

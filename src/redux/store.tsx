@@ -1,9 +1,6 @@
 import {v1} from "uuid";
-import {addPostAC, profilePageReducer, UpdateNewPosAC} from "./ProfilePageReducer";
-import {AddMessageAC, dialogsPageReducer, updateMessageAC} from "./DialoguesPageReducer";
-import {sideBarReducer} from "./SideBarReducer";
 
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     addPost: (post: string | undefined) => void,
     updateNewPost: (newText: string) => void,
@@ -14,47 +11,47 @@ export type StoreType = {
     _onChange: (_state: RootStateType) => void,
     getState: () => RootStateType,
 }
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType,
     sideBar: SideBarType,
 
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
-export type PostsType = {
+ type PostsType = {
     id: string,
     message: string | undefined,
     count: number,
 }
-export type DialogsPageType = {
+ type DialogsPageType = {
     dialogsData: Array<DialogsDataType>,
     messagesData: Array<MessagesData>,
     newMessage: string,
 }
-export type DialogsDataType = {
+ type DialogsDataType = {
     id: number,
     name: string,
 }
-export type MessagesData = {
+ type MessagesData = {
     id: string,
     message: string,
 }
-export type SideBarType = {
+ type SideBarType = {
     list: Array<List>,
     friends: Array<Friends>,
 }
-export type List = {
+ type List = {
     id: number,
     namePage: string,
 }
-export type Friends = {
+ type Friends = {
     avatar: string,
     name: string,
 }
-export type ActionType = ReturnType<typeof addPostAC> |
+ type ActionType = ReturnType<typeof addPostAC> |
                          ReturnType<typeof UpdateNewPosAC> |
                          ReturnType<typeof AddMessageAC> |
                          ReturnType<typeof updateMessageAC>
@@ -137,13 +134,54 @@ export let store: StoreType = {
         return this._state;
     },
     dispatch(action) {
-        this._state.profilePage = profilePageReducer( this._state.profilePage,action)
-        this._state.dialogsPage = dialogsPageReducer( this._state.dialogsPage,action)
-        this._state.sideBar = sideBarReducer( this._state.sideBar,action)
-        this._onChange(this._state)
+        if (action.type === "ADD_Post") {
+            let newPost = {
+                id: v1(),
+                message: action.post,
+                count: 25,
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._onChange(this._state)
+        } else if (action.type === 'Update_New_Post') {
+            this._state.profilePage.newPostText = action.newText;
+            this._onChange(this._state)
+        } else if (action.type === 'Add_Message') {
+            let newMessage = {
+                id: v1(), message: action.message
+            }
+            this._state.dialogsPage.messagesData.push(newMessage)
+            this._onChange(this._state)
+        } else if (action.type === 'Update_Message') {
+            this._state.dialogsPage.newMessage = action.newMessage;
+            this._onChange(this._state)
+        }
+
     },
 }
-
+export const addPostAC = (text: string | undefined) => {
+    return {
+        type: "ADD_Post",
+        post: text
+    } as const
+}
+export const UpdateNewPosAC = (newMessage: string) => {
+    return {
+        type: "Update_New_Post",
+        newText: newMessage
+    } as const
+}
+export const AddMessageAC = (message: string) => {
+    return {
+        type: "Add_Message",
+        message: message
+    } as const
+}
+export const updateMessageAC = (newMessage: string) => {
+    return {
+        type: "Update_Message",
+        newMessage: newMessage
+    } as const
+}
 
 
 

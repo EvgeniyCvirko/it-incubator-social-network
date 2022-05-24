@@ -1,16 +1,16 @@
 import React from 'react';
 import './MyPostContainer.css';
 import {Post,} from "./Post/Post";
-import {StoreType} from "../../../redux/store";
 import {BlockContainer} from "./Block/BlockContainer";
+import {AppStateType} from "../../../redux/redux_store";
 
 type MyPostPropsType = {
-    data: StoreType,
+    data: AppStateType,
 }
 
 export const MyPostContainer: React.FC<MyPostPropsType> = ({data}) => {
 
-    let postElement = data.getState().profilePage.posts.map(e => <Post id={e.id} message={e.message} count={e.count}/>)
+    let postElement = data.profilePage.posts.map(e => <Post id={e.id} message={e.message} count={e.count}/>)
     return (
         <div className='content'>
             <h2 className="title">My posts</h2>

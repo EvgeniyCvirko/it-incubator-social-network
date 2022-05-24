@@ -1,6 +1,22 @@
-import {ActionType, DialogsPageType} from "./store";
 import {v1} from "uuid";
+import {addPostAC, UpdateNewPosAC} from "./ProfilePageReducer";
 
+export type DialogsPageType = {
+    dialogsData: Array<DialogsDataType>,
+    messagesData: Array<MessagesData>,
+    newMessage: string,
+}
+type DialogsDataType = {
+    id: number,
+    name: string,
+}
+type MessagesData = {
+    id: string,
+    message: string,
+}
+type ActionTypeDialogsPage =
+    ReturnType<typeof AddMessageAC> |
+    ReturnType<typeof updateMessageAC>
 const Add_Message = 'Add_Message';
 const Update_Message = 'Update_Message';
 let initialState = {
@@ -22,7 +38,7 @@ let initialState = {
     newMessage: '',
 }
 
-export const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionType) => {
+export const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionTypeDialogsPage) => {
         switch (action.type) {
             case Add_Message:
                 let newMessage = {

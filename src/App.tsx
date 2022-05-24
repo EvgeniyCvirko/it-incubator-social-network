@@ -6,11 +6,11 @@ import {Profile} from "./components/Profile/Profile";
 import {Footer} from "./components/Footer/Footer";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import { Route,} from "react-router-dom";
-import { StoreType,} from "./redux/store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {AppStateType} from "./redux/redux_store";
 
 type AppPropsType = {
-    state: StoreType,
+    state: AppStateType,
 
 }
 
@@ -18,7 +18,7 @@ export const App: React.FC<AppPropsType> = ({state,}) => {
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Nav state={state.getState().sideBar}/>
+            <Nav state={state.sideBar}/>
             <div className='content'>
                 <Route path='/Message' render={() => <DialogsContainer
                     // data={state}

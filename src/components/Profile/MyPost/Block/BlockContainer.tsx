@@ -1,10 +1,10 @@
 import React from 'react';
 import './Block.css';
 import {addPostAC, UpdateNewPosAC} from "../../../../redux/ProfilePageReducer";
-import { StoreType} from "../../../../redux/store";
 import {Block} from "./Block";
-import {AddMessageAC, updateMessageAC} from "../../../../redux/DialoguesPageReducer";
 import {connect} from "react-redux";
+import {AppStateType} from "../../../../redux/redux_store";
+import {Dispatch} from "redux";
 
 // type BlockContainerPropsType = {
 //     data: StoreType
@@ -21,15 +21,22 @@ import {connect} from "react-redux";
     }
     return <Block addPost={addNewPost} updateNewPost={onChangeHandler} newPostText={state.profilePage.newPostText}/>
 }*/
+type MapStateToPropsType = {
+    newPostText: string
+}
+type MapDispatchToPropsType ={
+    updateNewPost: (newText: string) => void
+    addPost: (text: string | undefined) => void
+}
 
-let mapStateToProps = (store: StoreType) => {
+let mapStateToProps = (store: AppStateType): MapStateToPropsType  => {
     return{
-        newPostText: store.getState().profilePage.newPostText
+        newPostText: store.profilePage.newPostText
     }
 }
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch) : MapDispatchToPropsType=> {
     return{
-        updateMessage : (newText: string)=>{
+        updateNewPost : (newText: string)=>{
             dispatch(UpdateNewPosAC(newText))
         },
         addPost : (text: string | undefined)=>{

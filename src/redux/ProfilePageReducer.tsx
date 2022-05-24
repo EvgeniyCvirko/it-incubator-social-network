@@ -1,5 +1,17 @@
 import {v1} from "uuid";
-import {ActionType, ProfilePageType} from "./store";
+
+export type ProfilePageType = {
+    posts: Array<PostsType>
+    newPostText: string
+}
+type PostsType = {
+    id: string,
+    message: string | undefined,
+    count: number,
+}
+export type ActionProfilePageType = ReturnType<typeof addPostAC> |
+    ReturnType<typeof UpdateNewPosAC>
+
 const ADD_Post = "ADD_Post";
 const Update_New_Post = "Update_New_Post";
 
@@ -12,7 +24,7 @@ let initialState ={
     newPostText: '',
 }
 
-export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionProfilePageType) => {
         if (action.type === ADD_Post) {
             let newPost = {
                 id: v1(),

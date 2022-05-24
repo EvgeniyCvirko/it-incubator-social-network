@@ -1,13 +1,14 @@
 import c from './Dialogs.module.css'
-import { AddMessageAC,  updateMessageAC} from "../../redux/DialoguesPageReducer";
+import {AddMessageAC, DialogsPageType, updateMessageAC} from "../../redux/DialoguesPageReducer";
 import React from "react";
-import {store, StoreType} from "../../redux/store";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux_store";
+import {Dispatch} from "redux";
 
-export type DialogsPropsType = {
+/*export type DialogsPropsType = {
     data: StoreType,
-}
+}*/
 
 /*export const DialogsContainer: React.FC<DialogsPropsType> = ({data,}) => {
     const addMessage = (message: string) => {
@@ -24,12 +25,20 @@ export type DialogsPropsType = {
         </div>
     )
 }*/
-let mapStateToProps = (store: StoreType) => {
+type MapStateToPropsType = {
+    items: DialogsPageType
+}
+type MapDispatchToPropsType ={
+    updateMessage: (newMessage: string) => void
+    addMessage: (message: string ) => void
+}
+
+let mapStateToProps = (store: AppStateType): MapStateToPropsType => {
     return{
-        items: store.getState().dialogsPage
+        items: store.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
     return{
         updateMessage : (newMessage: string)=>{
             dispatch(updateMessageAC(newMessage))

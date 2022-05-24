@@ -1,7 +1,6 @@
 import {combineReducers, legacy_createStore as createStore} from "redux";
 import {profilePageReducer} from "./ProfilePageReducer";
 import {dialogsPageReducer} from "./DialoguesPageReducer";
-import {StoreType} from "./store";
 import {sideBarReducer} from "./SideBarReducer";
 
 
@@ -12,6 +11,8 @@ let rootReducer = combineReducers({
     sideBar: sideBarReducer
 });
 
+export type AppStateType = ReturnType<typeof rootReducer>// дай мне возвращаемый тип, и возьми его из rootReducer
 
+ let store : AppStateType = createStore(rootReducer);
 
-export let store : StoreType = createStore(rootReducer);
+export default store
