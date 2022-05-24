@@ -6,11 +6,12 @@ import {sideBarReducer} from "./SideBarReducer";
 
 
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
     sideBar: sideBarReducer
 });
 
 
-export let store : StoreType = createStore(reducers);
+
+export let store : StoreType = createStore(rootReducer);

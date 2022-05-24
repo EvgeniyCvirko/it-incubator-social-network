@@ -20,7 +20,9 @@ export const App: React.FC<AppPropsType> = ({state,}) => {
             <Header/>
             <Nav state={state.getState().sideBar}/>
             <div className='content'>
-                <Route path='/Message' render={() => <DialogsContainer data={state}/>
+                <Route path='/Message' render={() => <DialogsContainer
+                    // data={state}
+                />
                 }/>
                 <Route path='/Profile' render={() => <Profile data={state} />
                 }/>

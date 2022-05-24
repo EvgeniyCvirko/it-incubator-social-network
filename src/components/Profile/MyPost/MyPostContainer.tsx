@@ -14,7 +14,8 @@ export const MyPostContainer: React.FC<MyPostPropsType> = ({data}) => {
     return (
         <div className='content'>
             <h2 className="title">My posts</h2>
-            <BlockContainer data={data}
+            <BlockContainer
+                // data={data}
             />
             <div>{postElement}</div>
         </div>
