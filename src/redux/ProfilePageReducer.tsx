@@ -31,11 +31,14 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
                 message: action.post,
                 count: 25,
             }
-            state.posts.push(newPost)
-            return state;
+            let stateCopy = {...state};
+            stateCopy.posts = [newPost, ...stateCopy.posts]// проверить работу
+            // state.posts.push(newPost)
+            return stateCopy;
         } else if (action.type === Update_New_Post) {
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state, newPostText: action.newText }
+            state.newPostText = action.newText;//проверить работу
+            return stateCopy;
         }
 
     return state;
