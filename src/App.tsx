@@ -6,25 +6,18 @@ import {Footer} from "./components/Footer/Footer";
 import { Route,} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {NavContainer} from "./components/Nav/NavContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
-/*type AppPropsType = {
-    state: Store<AppStateType>
-
-}*/
 
 export const App = () => {
-    // const  { profilePage, dialogsPage, sideBar}  = state.getState()
     return (
         <div className='app-wrapper'>
             <Header/>
             <NavContainer />
             <div className='content'>
-                <Route path='/Message' render={() => <DialogsContainer
-                    // data={state}
-                />
-                }/>
-                <Route path='/Profile' render={() => <ProfileContainer />
-                }/>
+                <Route path='/Message' render={() => <DialogsContainer/>}/>
+                <Route path='/Profile' render={() => <ProfileContainer />}/>
+                <Route path='/Users' render={() => <UsersContainer />}/>
             </div>
             <Footer/>
         </div>
