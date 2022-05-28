@@ -1,6 +1,7 @@
 import React from 'react';
 import {UsersType} from "../../redux/UsersReducer";
 import {v1} from "uuid";
+import s from './Users.module.css'
 
 export type UsersPropsType = {
     items:  UsersType[]
@@ -31,8 +32,8 @@ export const Users = (props:UsersPropsType ) =>{
                     props.changeUnFollowed(u.id)
                 }
                 return(
-                <div key={u.id}>
-                    <div>
+                <div key={u.id} className={s.User}>
+                    <div className={s.LeftBlock}>
                         <div>
                             <img src={u.photoUser}/>
                         </div>
@@ -42,7 +43,7 @@ export const Users = (props:UsersPropsType ) =>{
                                 :<button onClick={changeFollowedHandler}>Follow</button>}
                         </div>
                     </div>
-                    <div>
+                    <div className={s.RightBlock}>
                         <div>
                             <div>{u.fullName}</div>
                             <div>{u.status}</div>

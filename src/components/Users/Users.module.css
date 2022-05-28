@@ -1,0 +1,27 @@
+.User {
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    width: 80%;
+    border : 2px solid wheat;
+    border-radius: 15px;
+}
+.LeftBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
+    border : 2px solid wheat;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.RightBlock{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border : 2px solid wheat;
+    border-radius: 15px;
+    padding: 5px;
+}
