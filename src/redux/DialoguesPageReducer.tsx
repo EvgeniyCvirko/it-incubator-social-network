@@ -1,16 +1,15 @@
 import {v1} from "uuid";
-import {addPostAC, UpdateNewPosAC} from "./ProfilePageReducer";
 
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>,
     messagesData: Array<MessagesData>,
     newMessage: string,
 }
-type DialogsDataType = {
+export type DialogsDataType = {
     id: number,
     name: string,
 }
-type MessagesData = {
+export type MessagesData = {
     id: string,
     message: string,
 }
@@ -46,12 +45,10 @@ export const dialogsPageReducer = (state: DialogsPageType = initialState, action
                 }
                 let stateCopy = {...state}
                 stateCopy.messagesData = [...stateCopy.messagesData, newMessage]
-                // state.messagesData.push(newMessage)
                 return stateCopy;
             }
             case (Update_Message): {
                 let stateCopy = {...state, newMessage: action.newMessage}
-                // newMessage = action.newMessage;
                 return stateCopy;
             }
         }

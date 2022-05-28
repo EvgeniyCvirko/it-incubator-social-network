@@ -2,7 +2,7 @@ import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
 import React, {ChangeEvent, KeyboardEvent} from "react";
-import {DialogsPageType} from "../../redux/store";
+import {DialogsPageType} from "../../redux/DialoguesPageReducer";
 
 export type DialogsPropsType = {
     updateMessage: (newMessage: string) => void

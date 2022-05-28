@@ -1,30 +1,29 @@
 import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
-import {Nav} from "./components/Nav/Nav";
-import {Profile} from "./components/Profile/Profile";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {Footer} from "./components/Footer/Footer";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import { Route,} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {AppStateType} from "./redux/redux_store";
+import {NavContainer} from "./components/Nav/NavContainer";
 
-type AppPropsType = {
-    state: AppStateType,
+/*type AppPropsType = {
+    state: Store<AppStateType>
 
-}
+}*/
 
-export const App: React.FC<AppPropsType> = ({state,}) => {
+export const App = () => {
+    // const  { profilePage, dialogsPage, sideBar}  = state.getState()
     return (
         <div className='app-wrapper'>
             <Header/>
-            <Nav state={state.sideBar}/>
+            <NavContainer />
             <div className='content'>
                 <Route path='/Message' render={() => <DialogsContainer
                     // data={state}
                 />
                 }/>
-                <Route path='/Profile' render={() => <Profile data={state} />
+                <Route path='/Profile' render={() => <ProfileContainer />
                 }/>
             </div>
             <Footer/>

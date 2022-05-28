@@ -4,7 +4,7 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
 }
-type PostsType = {
+export type PostsType = {
     id: string,
     message: string | undefined,
     count: number,
