@@ -13,12 +13,17 @@ export type UsersPropsType = {
 
 
 export const Users = (props:UsersPropsType ) =>{
+
+    const getUsers = () =>{
         if( props.items.length === 0 ) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 props.setUsers(response.data.items)
             })
         }
+    }
+
     return <div>
+        <button onClick={getUsers}>get Users</button>
         {
             props.items.map(u => {
                 const changeFollowedHandler = () =>{
