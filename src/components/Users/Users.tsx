@@ -1,7 +1,8 @@
 import React from 'react';
 import {UsersType} from "../../redux/UsersReducer";
-import {v1} from "uuid";
+import photoUser from '../../redux/Icon/User.svg.png'
 import s from './Users.module.css'
+import  axios from 'axios';
 
 export type UsersPropsType = {
     items:  UsersType[]
@@ -12,15 +13,10 @@ export type UsersPropsType = {
 
 
 export const Users = (props:UsersPropsType ) =>{
-        if( props.items.length === 0 ){
-            props.setUsers(
-                [
-                    {id: v1(), followed: false, fullName: "Dmitriy", status: "I am boss", location:{ country: "Belarus", city: 'Minsk' } , photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-                    {id: v1(),  followed: false, fullName: "Elena", status: "I am lady", location:{ country: "Germany", city: 'Hamburg' }, photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-                    {id: v1(), followed: true, fullName: "Sasha", status: "I am boss too", location:{ country: "Ukraine", city: 'Kiev' },  photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-                    {id: v1(), followed: true, fullName: "Igor", status: "I am boss too", location:{ country: "Brazilian", city: 'San Paulo' }, photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-                ]
-            )
+        if( props.items.length === 0 ) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+                props.setUsers(response.data.items)
+            })
         }
     return <div>
         {
@@ -35,7 +31,7 @@ export const Users = (props:UsersPropsType ) =>{
                 <div key={u.id} className={s.User}>
                     <div className={s.LeftBlock}>
                         <div>
-                            <img src={u.photoUser}/>
+                            <img src={ u.photos.small !== null ? u.photos.small : photoUser}/>
                         </div>
                         <div>
                             { u.followed
@@ -45,12 +41,12 @@ export const Users = (props:UsersPropsType ) =>{
                     </div>
                     <div className={s.RightBlock}>
                         <div>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </div>
                         <div>
-                            <div>{u.location.city}</div>
-                            <div>{u.location.country}</div>
+                            <div>{'u.location.city'}</div>
+                            <div>{'u.location.country'}</div>
                         </div>
                     </div>
                 </div>)
