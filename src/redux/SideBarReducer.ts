@@ -1,30 +1,32 @@
+import {v1} from "uuid";
 
 export type SideBarType = {
     list: Array<List>,
-    friends: Array<Friends>,
+    friends: Array<FriendsType>,
 }
 type List = {
-    id: number,
+    id: string,
     namePage: string,
 }
-type Friends = {
+export type FriendsType = {
+    id: string
     avatar: string,
     name: string,
 }
 
 let initialState = {
     list: [
-        {id: 1, namePage: 'Profile'},
-        {id: 2, namePage: 'Message'},
-        {id: 3, namePage: 'News'},
-        {id: 4, namePage: 'Music'},
-        {id: 5, namePage: 'Settings'},
-        {id: 5, namePage: 'Users'},
+        {id: v1(), namePage: 'Profile'},
+        {id: v1(), namePage: 'Message'},
+        {id: v1(), namePage: 'News'},
+        {id: v1(), namePage: 'Music'},
+        {id: v1(), namePage: 'Settings'},
+        {id: v1(), namePage: 'Users'},
     ],
     friends: [
-        {avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Sasha"},
-        {avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Victor"},
-        {avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Dima"},
+        { id:v1(), avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Sasha"},
+        { id:v1(), avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Victor"},
+        { id:v1(), avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Dima"},
     ],
 }
 

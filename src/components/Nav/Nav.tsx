@@ -12,7 +12,7 @@ export const Nav = (props: NavPropsType) =>{
     let list = props.state.list.map( e =>{
         let path = '/' + e.namePage;
         return(
-            <div className={b.item}>
+            <div className={b.item} key={e.id}>
                 <NavLink to={path} activeClassName={b.active}>{e.namePage}</NavLink>
             </div>
         )

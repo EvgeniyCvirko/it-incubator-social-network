@@ -1,17 +1,15 @@
 import React from 'react';
 import s from './Friends.module.css';
+import {FriendsType} from "../../../redux/SideBarReducer";
 
 type FriendsPropsType={
-    friend: Array<Friends>,
+    friend: Array<FriendsType>,
 }
-export type Friends={
-    avatar: string,
-    name: string,
-}
+
 export const Friends = (props:FriendsPropsType) =>{
     let listFriends = props.friend.map(e=>{
         return(
-            <div>
+            <div key={e.id}>
                 <img src={e.avatar} alt=""/>{e.name}
             </div>
         )
