@@ -12,7 +12,7 @@ export type UsersPropsType = {
 }
 
 
-export class Users extends React.Component<UsersPropsType, UsersType[]>{
+export class UsersClass extends React.Component<UsersPropsType, UsersType[]>{
  constructor(props:UsersPropsType ) {
      super(props);
      axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
@@ -21,9 +21,9 @@ export class Users extends React.Component<UsersPropsType, UsersType[]>{
 
  }
 
-    // @ts-ignore
+
     render(){
-        return
+        return(
         <div>
             {
                 this.props.items.map(u => {
@@ -58,6 +58,6 @@ export class Users extends React.Component<UsersPropsType, UsersType[]>{
                         </div>)
                 })
             }
-        </div>
+        </div>)
     }
 }
