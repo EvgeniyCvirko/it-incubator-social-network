@@ -27,7 +27,7 @@
     color: white;
     margin: 0;
 }
-span{
+.like{
     grid-area: s;
     display: flex;
     align-items: flex-end;

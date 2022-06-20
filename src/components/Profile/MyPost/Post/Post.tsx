@@ -14,7 +14,7 @@ export const Post = (props:PostPropsType) =>{
                 <img src="https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png" alt=""/>
             </div>
             <p className="text">{props.message}</p>
-            <span>Like{props.count}</span>
+            <span className='like'>Like{props.count}</span>
         </div>
     )
 }
