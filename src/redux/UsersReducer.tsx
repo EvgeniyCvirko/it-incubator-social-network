@@ -1,7 +1,10 @@
-import {v1} from "uuid";
+import React from 'react';
 
 export type UsersPageType ={
     users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 export type UsersType = {
     id: string
@@ -24,15 +27,13 @@ export type LocationType = {
 export type ActionUsersPageType = ReturnType<typeof FollowAC>
     | ReturnType<typeof UnFollowAC>
     | ReturnType<typeof setUsersAC>
-/*[
-    {id: v1(), followed: false, fullName: "Dmitriy", status: "I am boss", location:{ country: "Belarus", city: 'Minsk' } , photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-    {id: v1(),  followed: false, fullName: "Elena", status: "I am lady", location:{ country: "Germany", city: 'Hamburg' }, photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-    {id: v1(), followed: true, fullName: "Sasha", status: "I am boss too", location:{ country: "Ukraine", city: 'Kiev' },  photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-    {id: v1(), followed: true, fullName: "Igor", status: "I am boss too", location:{ country: "Brazilian", city: 'San Paulo' }, photoUser: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/640px-SNice.svg.png', },
-]*/
+    | ReturnType<typeof CurrentPageAC>
 
 let initialState ={
     users: [],
+    pageSize: 5,
+    totalUsersCount:21,
+    currentPage: 3
 }
 
 export const usersPageReducer = (state: UsersPageType = initialState, action: ActionUsersPageType):UsersPageType => {
@@ -50,10 +51,13 @@ export const usersPageReducer = (state: UsersPageType = initialState, action: Ac
             };
         case "SetUsers" :
             return {...state, users: [...state.users, ...action.users]}
+        case "CurrentPage" :
+            return {...state, currentPage: action.currentPage}
         default:
             return state;
     }
 }
 export const FollowAC = (IdUser: string) => ({type: "Follow", IdUser} as const);
 export const UnFollowAC = (IdUser: string) => ({type: "UnFollow", IdUser} as const);
+export const CurrentPageAC = (currentPage: number) => ({type: "CurrentPage", currentPage} as const);
 export const setUsersAC = (users: UsersType[]) => ({type: "SetUsers", users} as const);

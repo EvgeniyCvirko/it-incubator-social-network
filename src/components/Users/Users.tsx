@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {UsersType} from "../../redux/UsersReducer";
 import photoUser from '../../redux/Icon/User.svg.png'
@@ -14,16 +15,15 @@ export type UsersPropsType = {
 
 export const Users = (props:UsersPropsType ) =>{
 
-    const getUsers = () =>{
         if( props.items.length === 0 ) {
             axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
                 props.setUsers(response.data.items)
             })
         }
-    }
 
-    return <div>
-        <button onClick={getUsers}>get Users</button>
+
+    return (
+        <div>
         {
             props.items.map(u => {
                 const changeFollowedHandler = () =>{
@@ -58,4 +58,5 @@ export const Users = (props:UsersPropsType ) =>{
             })
         }
     </div>
+    )
 }

@@ -6,28 +6,38 @@ import  axios from 'axios';
 
 export type UsersPropsType = {
     items:  UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     changeFollowed : (id: string) => void
     changeUnFollowed : (id: string) => void
+    setCurrentPage : (currentPage: number) => void
     setUsers: (users: UsersType[] ) => void
 }
 
 
 export class UsersClass extends React.Component<UsersPropsType, UsersType[]>{
-/* constructor(props:UsersPropsType ) {
-     super(props);
 
-
- }*/
  componentDidMount() {
-     axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+
+     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
          this.props.setUsers(response.data.items)
      })
  }
 
 
     render(){
+        let page = []
+        let pageCount = Math.ceil(this.props.totalUsersCount/this.props.pageSize)
+        for(let i = 1; i <= pageCount; i++){
+            page.push(i)
+        }
         return(
         <div>
+            {page.map(p=>{
+                return <span className={this.props.currentPage === p ? s.PageActive : s.Page} onClick={()=>{this.props.setCurrentPage(p)}}>{p}</span>
+            })}
+
             {
                 this.props.items.map(u => {
                     const changeFollowedHandler = () =>{
@@ -61,6 +71,7 @@ export class UsersClass extends React.Component<UsersPropsType, UsersType[]>{
                         </div>)
                 })
             }
-        </div>)
+        </div>
+        )
     }
 }
