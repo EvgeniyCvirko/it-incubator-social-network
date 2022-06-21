@@ -6,7 +6,7 @@ import {Footer} from "./components/Footer/Footer";
 import { Route,} from "react-router-dom";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {NavContainer} from "./components/Nav/NavContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 export const App = () => {
