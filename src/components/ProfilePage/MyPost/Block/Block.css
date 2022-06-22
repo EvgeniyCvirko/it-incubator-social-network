@@ -1,0 +1,20 @@
+.block {
+    max-width: 80%;
+    padding: 10px 0 0 25px;
+}
+textarea {
+    width: 100%;
+    border-radius: 5px;
+}
+.block_button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+.button {
+    width: 150px;
+    height: 25px;
+}
