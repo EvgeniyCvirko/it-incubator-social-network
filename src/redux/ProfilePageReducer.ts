@@ -3,17 +3,41 @@ import {v1} from "uuid";
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
+    profile: ProfileType
 }
 export type PostsType = {
     id: string,
     message: string | undefined,
     count: number,
 }
-export type ActionProfilePageType = ReturnType<typeof addPostAC> |
-    ReturnType<typeof UpdateNewPosAC>
+export type ActionProfilePageType = ReturnType<typeof addPostAC>
+   | ReturnType<typeof UpdateNewPosAC>
+   | ReturnType<typeof setUsersProfile>
 
-const ADD_Post = "ADD_Post";
-const Update_New_Post = "Update_New_Post";
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts:ContactsProfileType
+    photos: PhotosProfileType
+}
+export type ContactsProfileType ={
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type PhotosProfileType ={
+    small: string
+    large: string
+}
+
 
 let initialState ={
     posts: [
@@ -21,37 +45,48 @@ let initialState ={
         {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
         {id: v1(), message: 'Ho-ho-ho', count: 50},
     ],
+    profile: {
+        userId: 1,
+        lookingForAJob: true,
+        lookingForAJobDescription: '',
+        fullName: 'Evgeniy Cvirko',
+        contacts:{
+            github: 'https://github.com/EvgeniyCvirko',
+            vk: 'https://vk.com',
+            facebook: '',
+            instagram: '@EvgeniyCvirko',
+            twitter: '',
+            website: '',
+            youtube: '',
+            mainLink: '',
+        },
+        photos: {
+            small:'https://cdn.vectorstock.com/i/1000x1000/38/17/male-face-avatar-logo-template-pictograph-vector-11333817.webp',
+            large:'',
+        }
+
+    },
     newPostText: '',
 }
 
 export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionProfilePageType) => {
-        if (action.type === ADD_Post) {
+
+    switch (action.type) {
+        case "ADD_Post":
             let newPost = {
                 id: v1(),
                 message: action.post,
                 count: 25,
             }
-            let stateCopy = {...state};
-            stateCopy.posts = [newPost, ...stateCopy.posts]// проверить работу
-            // state.posts.push(newPost)
-            return stateCopy;
-        } else if (action.type === Update_New_Post) {
-            let stateCopy = {...state, newPostText: action.newText }
-            state.newPostText = action.newText;//проверить работу
-            return stateCopy;
-        }
-
+            return {...state, posts: [...state.posts, newPost]};
+        case "Update_New_Post":
+            return {...state, newPostText: action.newText};
+        case "SetUserProfile":
+            return {...state, profile: action.profile }
+    }
     return state;
 }
-export const addPostAC = (text: string | undefined) => {
-    return {
-        type: "ADD_Post",
-        post: text
-    } as const
-}
-export const UpdateNewPosAC = (newMessage: string) => {
-    return {
-        type: "Update_New_Post",
-        newText: newMessage
-    } as const
-}
+export const addPostAC = (text: string | undefined) => ({type: "ADD_Post",post: text} as const)
+export const UpdateNewPosAC = (newMessage: string) => ({type: "Update_New_Post", newText: newMessage} as const);
+
+export const setUsersProfile = (profile: any) => ({type: "SetUserProfile", profile} as const);

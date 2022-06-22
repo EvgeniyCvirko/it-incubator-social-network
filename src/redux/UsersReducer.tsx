@@ -41,7 +41,6 @@ let initialState ={
 }
 
 export const usersPageReducer = (state: UsersPageType = initialState, action: ActionUsersPageType):UsersPageType => {
-    console.log(state.totalUsersCount)
     switch (action.type) {
         case "Follow" :
             return {

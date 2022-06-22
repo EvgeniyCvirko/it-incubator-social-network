@@ -18,3 +18,6 @@ export type AppStateType = ReturnType<typeof rootReducer>// дай мне воз
  let store: Store<AppStateType>  = createStore(rootReducer);
 
 export default store
+
+// @ts-ignore
+window.store = store
