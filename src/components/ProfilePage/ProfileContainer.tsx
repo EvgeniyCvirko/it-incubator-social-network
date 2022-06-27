@@ -7,9 +7,8 @@ import axios from "axios";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
 type PathParamsType = {
-    userId: number
+    userId: string
 }
-// @ts-ignore
 type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 
 type ProfileContainerType ={

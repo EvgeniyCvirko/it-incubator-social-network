@@ -3,6 +3,7 @@ import {profilePageReducer} from "./ProfilePageReducer";
 import {dialogsPageReducer} from "./DialoguesPageReducer";
 import {sideBarReducer} from "./SideBarReducer";
 import {usersPageReducer} from "./UsersReducer";
+import {AuthReducer} from "./AuthReducer";
 
 
 
@@ -11,6 +12,7 @@ let rootReducer = combineReducers({
     dialogsPage: dialogsPageReducer,
     sideBar: sideBarReducer,
     usersPage: usersPageReducer,
+    auth: AuthReducer,
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>// дай мне возвращаемый тип, и возьми его из rootReducer
