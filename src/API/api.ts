@@ -18,3 +18,11 @@ export const usersAPI = {
     }
 
 }
+
+export const authAPI = {
+    getAuth(){
+        return instance.get(`auth/me`).then(response => {
+            return response.data
+        })
+    }
+}
