@@ -15,10 +15,19 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data
         })
+    },
+    postUsers(id: string){
+      return instance.post(`follow/${id}`, {}).then(response => {
+          return response.data
+      })
+    },
+    deleteUsers(id: string){
+        return instance.delete(`follow/${id}`, {}).then(response => {
+            return response.data
+        })
     }
 
 }
-
 export const authAPI = {
     getAuth(){
         return instance.get(`auth/me`).then(response => {

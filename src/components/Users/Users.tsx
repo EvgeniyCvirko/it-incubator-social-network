@@ -3,7 +3,7 @@ import {UsersType} from "../../redux/UsersReducer";
 import photoUser from '../../redux/Icon/User.svg.png'
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../API/api";
 
 export type UsersPropsType = {
     items: UsersType[]
@@ -33,32 +33,18 @@ export const Users = (props: UsersPropsType) => {
             {
                 props.items.map(u => {
                         const changeFollowedHandler = () => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},
-                                {withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "64057af6-0e83-4806-9023-16837f4ae3e0"
-                                    },
-                                })
-                                .then(response => {
-                                    if (response.data.resultCode === 0) {
-
-                                    }
-                                })
-                            props.changeFollowed(u.id)
+                            usersAPI.postUsers(u.id).then(data => {
+                                if(data.resultCode === 0) {
+                                    props.changeFollowed(u.id)
+                                }
+                            })
                         }
                             const changeUnFollowedHandler = () => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                    {withCredentials: true,
-                                    headers: {
-                                        "API-KEY": "64057af6-0e83-4806-9023-16837f4ae3e0"
-                                    },
-                                    })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
-                                            props.changeUnFollowed(u.id)
-                                        }
-                                    })
-
+                                usersAPI.deleteUsers(u.id).then(data => {
+                                    if(data.resultCode === 0) {
+                                        props.changeUnFollowed(u.id)
+                                    }
+                                })
                             }
                             return (
                                 <div key={u.id} className={s.User}>
