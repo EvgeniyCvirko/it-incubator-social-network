@@ -6,6 +6,7 @@ export type UsersPageType ={
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: Array<string>
 }
 export type UsersType = {
     id: string
@@ -31,16 +32,19 @@ export type ActionUsersPageType = ReturnType<typeof changeFollowed>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>
+    | ReturnType<typeof setFollowingInProgress>
 
-let initialState ={
+let initialState = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: [],
 }
 
 export const usersPageReducer = (state: UsersPageType = initialState, action: ActionUsersPageType):UsersPageType => {
+
     switch (action.type) {
         case "Follow" :
             return {
@@ -60,6 +64,12 @@ export const usersPageReducer = (state: UsersPageType = initialState, action: Ac
             return { ...state, totalUsersCount: action.count}
         case "SetToggleFetching":
             return {...state, isFetching: action.isFetching}
+        case "SetFollowingInProgress":
+            return {...state,
+                followingInProgress: action.isFollowing ?
+                    [...state.followingInProgress, action.userId]:
+                    state.followingInProgress.filter(id => id !== action.userId )
+            }
         default:
             return state;
     }
@@ -69,4 +79,5 @@ export const changeUnFollowed = (IdUser: string) => ({type: "UnFollow", IdUser} 
 export const setCurrentPage = (currentPage: number) => ({type: "SetCurrentPage", currentPage} as const);
 export const setTotalUsersCount = (count: number) => ({type: "SetTotalUsersPage", count} as const);
 export const setIsFetching = (isFetching: boolean) => ({type: "SetToggleFetching", isFetching} as const);
+export const setFollowingInProgress = ( userId:string, isFollowing: boolean) => ({type: "SetFollowingInProgress", userId, isFollowing} as const);
 export const setUsers = (users: UsersType[]) => ({type: "SetUsers", users} as const);
