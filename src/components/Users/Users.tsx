@@ -33,7 +33,7 @@ export const Users = (props: UsersPropsType) => {
             {
                 props.items.map(u => {
                         const changeFollowedHandler = () => {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,{},
+                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},
                                 {withCredentials: true,
                                     headers: {
                                         "API-KEY": "64057af6-0e83-4806-9023-16837f4ae3e0"
@@ -47,7 +47,7 @@ export const Users = (props: UsersPropsType) => {
                             props.changeFollowed(u.id)
                         }
                             const changeUnFollowedHandler = () => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0//follow/${u.id}`,
+                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
                                     {withCredentials: true,
                                     headers: {
                                         "API-KEY": "64057af6-0e83-4806-9023-16837f4ae3e0"
