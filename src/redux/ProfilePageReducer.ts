@@ -88,5 +88,4 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
 }
 export const addPostAC = (text: string | undefined) => ({type: "ADD_Post",post: text} as const)
 export const UpdateNewPosAC = (newMessage: string) => ({type: "Update_New_Post", newText: newMessage} as const);
-
 export const setUsersProfile = (profile: any) => ({type: "SetUserProfile", profile} as const);
