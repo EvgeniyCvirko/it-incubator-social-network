@@ -2,10 +2,8 @@ import {AppStateType} from "../../redux/redux_store";
 import {connect} from "react-redux";
 import {ProfilePage} from "./ProfilePage";
 import React from "react";
-import {ProfilePageType, ProfileType, setUsersProfile} from "../../redux/ProfilePageReducer";
-import axios from "axios";
+import {getProfile, ProfilePageType, ProfileType} from "../../redux/ProfilePageReducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {profileAPI} from "../../API/api";
 
 type PathParamsType = {
     userId: string
@@ -14,7 +12,7 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 
 type ProfileContainerType ={
     profile: ProfileType
-    setUsersProfile: (profile: ProfileType) => void
+    getProfile: (userId: string) => void
 }
 
 type MapSateToPropsType = {
@@ -25,9 +23,7 @@ class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        profileAPI.getProfile(userId).then(data => {
-            this.props.setUsersProfile(data)
-        })
+        this.props.getProfile(userId)
     }
     render(){
         return <ProfilePage profile={this.props.profile}
@@ -35,7 +31,7 @@ class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
     }
 }
 const mapSateToProps = (state: AppStateType): MapSateToPropsType  => ({profile: state.profilePage.profile })
-const mapDispatchToProps =  { setUsersProfile }
+const mapDispatchToProps =  {getProfile}
 
 const WithRouterProfileContainer = withRouter(ProfileContainer)
 export default connect(mapSateToProps, mapDispatchToProps)(WithRouterProfileContainer)

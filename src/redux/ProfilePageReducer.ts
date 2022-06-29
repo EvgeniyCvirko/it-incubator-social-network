@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {profileAPI} from "../API/api";
+import {Dispatch} from "redux";
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -32,7 +34,6 @@ export type ContactsProfileType ={
     youtube: string
     mainLink: string
 }
-
 export type PhotosProfileType ={
     small: string
     large: string
@@ -88,4 +89,12 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
 }
 export const addPostAC = (text: string | undefined) => ({type: "ADD_Post",post: text} as const)
 export const UpdateNewPosAC = (newMessage: string) => ({type: "Update_New_Post", newText: newMessage} as const);
-export const setUsersProfile = (profile: any) => ({type: "SetUserProfile", profile} as const);
+export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
+
+export const getProfile = (userId:string) => {
+    return (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
+        profileAPI.getProfile(userId).then(data => {
+            dispatch(setUsersProfile(data))
+        })
+    }
+}
