@@ -16,7 +16,6 @@ export type UsersPropsType = {
     unFollowUser: (userId: string) => void
 }
 
-
 export const Users = (props: UsersPropsType) => {
     let page = []
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -30,7 +29,6 @@ export const Users = (props: UsersPropsType) => {
                     props.onPageChanged(p)
                 }}>{p}</span>
             })}
-
             {
                 props.items.map(u => {
                     const followedHandler = () => props.followUser(u.id)
@@ -61,7 +59,6 @@ export const Users = (props: UsersPropsType) => {
                                     </div>
                                 </div>)
                         }
-
                 )
                 }
                 </div>

@@ -41,9 +41,7 @@ class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
         this.props.setCurrentPage(currentPage)
         this.props.getUsers(currentPage, this.props.pageSize)//thunk
     }
-
     render() {
-
         return <>
             {this.props.isFetching && <Loading/>}
             <Users totalUsersCount={this.props.totalUsersCount}
