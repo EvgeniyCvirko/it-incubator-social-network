@@ -7,6 +7,7 @@ import {
 import {Users} from "./Users";
 import React from "react";
 import {Loading} from "../common/Loading";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 type MapSateToPropsType = {
     items: UsersType[]
@@ -75,4 +76,4 @@ const mapDispatchToProps = {
     followUser,
     unFollowUser,
 }
-export default connect(mapSateToProps, mapDispatchToProps)(UsersContainer)
+export default WithAuthRedirect(connect(mapSateToProps, mapDispatchToProps)(UsersContainer))
