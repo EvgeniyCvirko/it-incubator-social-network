@@ -1,9 +1,10 @@
-import {combineReducers, legacy_createStore as createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore as createStore, Store} from "redux";
 import {profilePageReducer} from "./ProfilePageReducer";
 import {dialogsPageReducer} from "./DialoguesPageReducer";
 import {sideBarReducer} from "./SideBarReducer";
 import {usersPageReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
+import  thunkMiddleware from "redux-thunk"
 
 
 
@@ -17,7 +18,7 @@ let rootReducer = combineReducers({
 
 export type AppStateType = ReturnType<typeof rootReducer>// дай мне возвращаемый тип, и возьми его из rootReducer
 
- let store: Store<AppStateType>  = createStore(rootReducer);
+ let store: Store<AppStateType>  = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store
 

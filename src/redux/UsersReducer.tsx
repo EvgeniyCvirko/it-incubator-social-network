@@ -1,4 +1,7 @@
 import React from 'react';
+import {usersAPI} from "../API/api";
+import {Dispatch} from "redux";
+
 
 export type UsersPageType ={
     users: UsersType[]
@@ -81,3 +84,15 @@ export const setTotalUsersCount = (count: number) => ({type: "SetTotalUsersPage"
 export const setIsFetching = (isFetching: boolean) => ({type: "SetToggleFetching", isFetching} as const);
 export const setFollowingInProgress = ( userId:string, isFollowing: boolean) => ({type: "SetFollowingInProgress", userId, isFollowing} as const);
 export const setUsers = (users: UsersType[]) => ({type: "SetUsers", users} as const);
+
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<ActionUsersPageType>) => {
+        dispatch(setIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(setUsers(data.items))
+            dispatch(setIsFetching(false))
+            dispatch(setTotalUsersCount(150))
+        })
+    }
+
+}

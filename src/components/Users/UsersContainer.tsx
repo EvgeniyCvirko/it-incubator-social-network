@@ -3,17 +3,12 @@ import {connect} from "react-redux";
 import {
     setCurrentPage,
     changeFollowed,
-    setUsers,
-    setIsFetching,
-    setTotalUsersCount,
     changeUnFollowed,
-    UsersType, setFollowingInProgress,
+    UsersType, setFollowingInProgress, getUsers,
 } from "../../redux/UsersReducer";
 import {Users} from "./Users";
 import React from "react";
-import axios from "axios";
 import {Loading} from "../common/Loading";
-import {usersAPI} from "../../API/api";
 
 type MapSateToPropsType = {
     items: UsersType[]
@@ -35,28 +30,18 @@ type UsersPropsType = {
     changeUnFollowed: (id: string) => void
     setCurrentPage: (currentPage: number) => void
     setFollowingInProgress: ( userId:string, isFollowing: boolean) => void
-    setTotalUsersCount: (totalUsersCount: number) => void
-    setUsers: (users: UsersType[]) => void
-    setIsFetching: (isFetching: boolean) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
+
     componentDidMount() {
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items)
-            this.props.setIsFetching(false)
-            this.props.setTotalUsersCount(19665)
-        })
+         this.props.getUsers(this.props.currentPage, this.props.pageSize)//thunk
     }
 
     onPageChanged = (currentPage: number) => {
         this.props.setCurrentPage(currentPage)
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(currentPage, this.props.pageSize).then(data => {
-            this.props.setUsers(data.items)
-            this.props.setIsFetching(false)
-        })
+        this.props.getUsers(currentPage, this.props.pageSize)//thunk
     }
 
     render() {
@@ -90,10 +75,8 @@ let mapSateToProps = (state: AppStateType): MapSateToPropsType => {
 const mapDispatchToProps = {
     changeFollowed,
     changeUnFollowed,
-    setUsers,
     setCurrentPage,
-    setTotalUsersCount,
-    setIsFetching,
-    setFollowingInProgress
+    setFollowingInProgress,
+    getUsers,
 }
 export default connect(mapSateToProps, mapDispatchToProps)(UsersContainer)
