@@ -96,3 +96,26 @@ export const getUsers = (currentPage: number, pageSize: number) => {
     }
 
 }
+
+export const followUser = (userId: string) =>{
+    return (dispatch: Dispatch<ActionUsersPageType>) => {
+        dispatch(setFollowingInProgress(userId,true))
+        usersAPI.postUsers(userId).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(changeFollowed(userId))
+            }
+            dispatch(setFollowingInProgress(userId,false))
+        })
+    }
+}
+export const unFollowUser = (userId: string) =>{
+    return (dispatch: Dispatch<ActionUsersPageType>) => {
+        dispatch(setFollowingInProgress(userId,true))
+        usersAPI.deleteUsers(userId).then(data => {
+            if(data.resultCode === 0) {
+                dispatch(changeUnFollowed(userId))
+            }
+            dispatch(setFollowingInProgress(userId,false))
+        })
+    }
+}

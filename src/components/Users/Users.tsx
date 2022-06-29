@@ -1,20 +1,19 @@
 import React from 'react';
-import { UsersType} from "../../redux/UsersReducer";
+import {UsersType} from "../../redux/UsersReducer";
 import photoUser from '../../redux/Icon/User.svg.png'
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../API/api";
 
 export type UsersPropsType = {
     items: UsersType[]
-    changeFollowed: (id: string) => void
     onPageChanged: (page: number) => void
-    changeUnFollowed: (id: string) => void
     totalUsersCount: number
     pageSize: number
     currentPage: number
     followingInProgress: Array<string>
     setFollowingInProgress: ( userId:string, isFollowing: boolean) => void
+    followUser: (userId: string) => void
+    unFollowUser: (userId: string) => void
 }
 
 
@@ -34,26 +33,8 @@ export const Users = (props: UsersPropsType) => {
 
             {
                 props.items.map(u => {
-                        const changeFollowedHandler = () => {
-                            props.setFollowingInProgress(u.id,true)
-                            usersAPI.postUsers(u.id).then(data => {
-                                if(data.resultCode === 0) {
-                                    props.changeFollowed(u.id)
-                                }
-                                props.setFollowingInProgress(u.id,false)
-                            })
-
-                        }
-                            const changeUnFollowedHandler = () => {
-                                props.setFollowingInProgress(u.id,true)
-                                usersAPI.deleteUsers(u.id).then(data => {
-                                    if(data.resultCode === 0) {
-                                        props.changeUnFollowed(u.id)
-                                    }
-                                    props.setFollowingInProgress(u.id,false)
-                                })
-
-                            }
+                    const followedHandler = () => props.followUser(u.id)
+                    const unFollowedHandler = () => props.unFollowUser(u.id)
                             return (
                                 <div key={u.id} className={s.User}>
                                     <div className={s.LeftBlock}>
@@ -64,8 +45,8 @@ export const Users = (props: UsersPropsType) => {
                                         </div>
                                         <div>
                                             {u.followed
-                                                ? <button disabled={props.followingInProgress.some(e => e === u.id )} onClick={changeUnFollowedHandler}>UnFollow</button>
-                                                : <button disabled={props.followingInProgress.some(e => e === u.id )} onClick={changeFollowedHandler}>Follow</button>}
+                                                ? <button disabled={props.followingInProgress.some(e => e === u.id )} onClick={unFollowedHandler}>UnFollow</button>
+                                                : <button disabled={props.followingInProgress.some(e => e === u.id )} onClick={followedHandler}>Follow</button>}
                                         </div>
                                     </div>
                                     <div className={s.RightBlock}>

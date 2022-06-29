@@ -2,9 +2,7 @@ import {AppStateType} from "../../redux/redux_store";
 import {connect} from "react-redux";
 import {
     setCurrentPage,
-    changeFollowed,
-    changeUnFollowed,
-    UsersType, setFollowingInProgress, getUsers,
+    UsersType, setFollowingInProgress, getUsers, followUser, unFollowUser,
 } from "../../redux/UsersReducer";
 import {Users} from "./Users";
 import React from "react";
@@ -26,11 +24,11 @@ type UsersPropsType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<string>
-    changeFollowed: (id: string) => void
-    changeUnFollowed: (id: string) => void
     setCurrentPage: (currentPage: number) => void
     setFollowingInProgress: ( userId:string, isFollowing: boolean) => void
     getUsers: (currentPage: number, pageSize: number) => void
+    followUser: (userId: string) => void
+    unFollowUser: (userId: string) => void
 }
 
 class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
@@ -53,8 +51,8 @@ class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
                    currentPage={this.props.currentPage}
                    items={this.props.items}
                    onPageChanged={this.onPageChanged}
-                   changeFollowed={this.props.changeFollowed}
-                   changeUnFollowed={this.props.changeUnFollowed}
+                   followUser={this.props.followUser}
+                   unFollowUser={this.props.unFollowUser}
                    followingInProgress={this.props.followingInProgress}
                    setFollowingInProgress={this.props.setFollowingInProgress}
             />
@@ -73,10 +71,10 @@ let mapSateToProps = (state: AppStateType): MapSateToPropsType => {
     }
 }
 const mapDispatchToProps = {
-    changeFollowed,
-    changeUnFollowed,
     setCurrentPage,
     setFollowingInProgress,
     getUsers,
+    followUser,
+    unFollowUser,
 }
 export default connect(mapSateToProps, mapDispatchToProps)(UsersContainer)
