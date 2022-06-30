@@ -1,9 +1,9 @@
-.list {
+.description {
     -ms-grid-row: 1;
     -ms-grid-column: 2;
     grid-area: l;
 }
-.list li {
+.description li {
     margin:0 25px 10px 15px ;
     color: whitesmoke;
     font-size: 20px;

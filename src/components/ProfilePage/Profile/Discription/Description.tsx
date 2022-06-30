@@ -1,5 +1,5 @@
 import React from 'react';
-import './List.css';
+import './Description.css';
 import smileNo from './../../../../img/ProfilePage/Profile/smileNo.jpg'
 import smileYes from './../../../../img/ProfilePage/Profile/smileYes.jpg'
 
@@ -10,7 +10,7 @@ type DescriptionPropsType = {
 
 export const Description = (props: DescriptionPropsType) =>{
     return(
-        <div className='list'>
+        <div className='description'>
             <li>{props.name}</li>
             <li>Looking for a job: {
                 props.lookingForAJob ?
