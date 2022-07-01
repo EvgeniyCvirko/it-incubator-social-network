@@ -15,24 +15,29 @@ type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 type ProfileContainerType ={
     profile: ProfileType
     getProfile: (userId: string) => void
+    myId:string
 }
 
 type MapSateToPropsType = {
     profile: ProfileType
+    myId:string
 }
 
 class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        this.props.getProfile(userId)
+        !userId ? this.props.getProfile(this.props.myId) : this.props.getProfile(userId)
     }
     render(){
         return <ProfilePage profile={this.props.profile}
         />
     }
 }
-const mapSateToProps = (state: AppStateType): MapSateToPropsType  => ({profile: state.profilePage.profile })
+const mapSateToProps = (state: AppStateType): MapSateToPropsType  => ({
+    profile: state.profilePage.profile,
+    myId: state.auth.userId
+})
 const mapDispatchToProps =  {getProfile}
 
 export default compose<React.ComponentType>(WithAuthRedirect , connect(mapSateToProps, mapDispatchToProps),withRouter)(ProfileContainer)

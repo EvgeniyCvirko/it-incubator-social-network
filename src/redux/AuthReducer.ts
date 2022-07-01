@@ -2,14 +2,14 @@ import {authAPI} from "../API/api";
 import {Dispatch} from "redux";
 
 export type AuthType = {
-    userId: number
+    userId: string
     email: string
     login: string
     isFetching: boolean
 }
 export type ActionAuthType = ReturnType<typeof setUserData>
 let initialState = {
-    userId: 0,
+    userId: '',
     email: '',
     login: '',
     isFetching: false,
@@ -20,14 +20,16 @@ export const AuthReducer = (state: AuthType = initialState, action: ActionAuthTy
             return {
                 ...state,
                 ...action.data,
-                isFetching:true
+                isFetching:true,
+                userId: action.data.userId
             };
     }
     return state;
 }
-export const setUserData = (userId: number, email: string, login: string) => ({
+export const setUserData = (userId: string, email: string, login: string) => ({
     type: "SetUserData", data:{userId,email,login}
 } as const);
+
 export const getAuthentication = () =>{
     return (dispatch: Dispatch<ActionAuthType>) =>{
         authAPI.getAuth().then(data =>{
