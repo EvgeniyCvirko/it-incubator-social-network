@@ -8,6 +8,8 @@ import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 
 type DataPropsType = {
     profile: ProfileType
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const Profile = (props: DataPropsType) =>{
@@ -18,7 +20,7 @@ export const Profile = (props: DataPropsType) =>{
             <Description name={props.profile.fullName}
                          lookingForAJob={props.profile.lookingForAJob}/>
             < Contacts contacts={props.profile.contacts} />
-            <ProfileStatus status = 'It is ok' />
+            <ProfileStatus status = {props.status} updateStatus={props.updateStatus} />
         </div>
     )
 }

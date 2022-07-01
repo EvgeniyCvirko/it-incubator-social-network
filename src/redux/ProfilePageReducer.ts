@@ -6,6 +6,7 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: ProfileType
+    status:string
 }
 export type PostsType = {
     id: string,
@@ -15,6 +16,7 @@ export type PostsType = {
 export type ActionProfilePageType = ReturnType<typeof addPostAC>
    | ReturnType<typeof UpdateNewPosAC>
    | ReturnType<typeof setUsersProfile>
+   | ReturnType<typeof setUserStatus>
 
 export type ProfileType = {
     userId: number
@@ -68,33 +70,56 @@ let initialState ={
 
     },
     newPostText: '',
+    status: '',
 }
 
 export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionProfilePageType) => {
 
     switch (action.type) {
-        case "ADD_Post":
+
+        case "AddPost":
             let newPost = {
                 id: v1(),
                 message: action.post,
                 count: 25,
             }
             return {...state, posts: [...state.posts, newPost]};
-        case "Update_New_Post":
+        case "UpdateNewPost":
             return {...state, newPostText: action.newText};
         case "SetUserProfile":
             return {...state, profile: action.profile }
+        case "SetUserStatus":
+            return {...state, status: action.status }
     }
     return state;
 }
-export const addPostAC = (text: string | undefined) => ({type: "ADD_Post",post: text} as const)
-export const UpdateNewPosAC = (newMessage: string) => ({type: "Update_New_Post", newText: newMessage} as const);
+export const addPostAC = (text: string | undefined) => ({type: "AddPost",post: text} as const)
+export const UpdateNewPosAC = (newMessage: string) => ({type: "UpdateNewPost", newText: newMessage} as const);
+export const setUserStatus = (status: string) => ({type: "SetUserStatus", status} as const);
 export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
 
 export const getProfile = (userId:string) => {
     return (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
         profileAPI.getProfile(userId).then(data => {
             dispatch(setUsersProfile(data))
+        })
+    }
+}
+
+export const getUserStatus = (userId:string) => {
+    return (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
+        profileAPI.getUserStatus(userId).then(response => {
+            dispatch(setUserStatus(response.data))
+        })
+    }
+}
+
+export const updateUserStatus = (status:string) => {
+    return (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
+        profileAPI.updateUserStatus(status).then(response =>{
+            if(response.data.resultCode === 0 ) {
+                dispatch(setUserStatus(status))
+            }
         })
     }
 }

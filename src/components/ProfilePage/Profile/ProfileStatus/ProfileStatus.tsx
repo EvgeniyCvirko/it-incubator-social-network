@@ -1,14 +1,25 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './ProfileStatus.module.css'
 
 type ProfileStatusPropsType ={
     status: string
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+
     state = {
-        editeMode:false
+        editeMode:false,
+        status: this.props.status
     }
+    onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+
+        this.setState({
+            status: e.currentTarget.value
+        })
+        console.log( typeof(this.state.status))
+    }
+
     activatedInput = () => {  //объявил метод стрелочной функцией
         this.setState({
             editeMode: true
@@ -16,8 +27,9 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
     }
     deActivatedInput (){  //обязательно привязать контекст this.deActivatedInput.bind(this)
         this.setState({
-            editeMode: false
+            editeMode: false,
         })
+        this.props.updateStatus(this.state.status)
     }
     render(){
 
@@ -25,11 +37,11 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                {this.state.editeMode
                ?
                <div>
-                   <input autoFocus={true} onBlur={this.deActivatedInput.bind(this)} value={this.props.status}/>
+                   status: <input onChange={this.onChangeHandler} autoFocus={true} onBlur={this.deActivatedInput.bind(this)} value={this.state.status}/>
                </div>
                :
                <div>
-                   <span onClick={this.activatedInput}> {this.props.status}</span>
+                   <span onClick={this.activatedInput}> status: {this.props.status}</span>
                </div>
                }
            </div>
