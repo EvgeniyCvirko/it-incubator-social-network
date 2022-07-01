@@ -10,13 +10,15 @@ type MyPostPropsType = {
 
 export const MyPost = (props: MyPostPropsType) => {
 
-    let postElement = props.items.map(e => <Post id={e.id} message={e.message} count={e.count}/>)
     return (
         <div className='content'>
             <h2 className="title">My posts</h2>
             <BlockContainer
             />
-            <div>{postElement}</div>
+            <div>{props.items.map(e => <div key={e.id}>
+                <Post id={e.id} message={e.message} count={e.count}/>
+            </div>)}
+            </div>
         </div>
     )
 }
