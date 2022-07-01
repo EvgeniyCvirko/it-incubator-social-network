@@ -5,14 +5,14 @@ export type AuthType = {
     userId: string
     email: string
     login: string
-    isFetching: boolean
+    isAuth: boolean
 }
 export type ActionAuthType = ReturnType<typeof setUserData>
 let initialState = {
     userId: '',
     email: '',
     login: '',
-    isFetching: false,
+    isAuth: false,
 }
 export const AuthReducer = (state: AuthType = initialState, action: ActionAuthType) => {
     switch (action.type) {
@@ -20,7 +20,7 @@ export const AuthReducer = (state: AuthType = initialState, action: ActionAuthTy
             return {
                 ...state,
                 ...action.data,
-                isFetching:true,
+                isAuth:true,
                 userId: action.data.userId
             };
     }

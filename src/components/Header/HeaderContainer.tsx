@@ -6,11 +6,11 @@ import {AppStateType} from "../../redux/redux_store";
 
 type MapStateToPropsType = {
     login: string
-    isFetching: boolean
+    isAuth: boolean
 }
 type HeaderContainerPropsType = {
     login: string
-    isFetching: boolean
+    isAuth: boolean
     getAuthentication: () => void
 }
 
@@ -26,7 +26,7 @@ class HeaderContainer extends React.Component <HeaderContainerPropsType,MapState
 }
 const mapStateToProps = (state: AppStateType): MapStateToPropsType  => {
    return {
-       isFetching: state.auth.isFetching,
+       isAuth: state.auth.isAuth,
        login: state.auth.login
    }}
 const mapDispatchToProps =  { getAuthentication }
