@@ -37,8 +37,11 @@ class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        !userId ? this.props.getProfile(this.props.myId) : this.props.getProfile(userId)
-        !userId ? this.props.getUserStatus(this.props.myId) : this.props.getUserStatus(userId)
+        if(!userId){
+            userId = this.props.myId
+        }
+        this.props.getProfile(userId)
+        this.props.getUserStatus(userId)
     }
     render(){
         return <ProfilePage profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
