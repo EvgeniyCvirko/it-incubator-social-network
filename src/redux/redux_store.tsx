@@ -4,7 +4,9 @@ import {dialogsPageReducer} from "./DialoguesPageReducer";
 import {sideBarReducer} from "./SideBarReducer";
 import {usersPageReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
-import  thunkMiddleware from "redux-thunk"
+import  thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from "redux-form"
+
 
 
 
@@ -14,6 +16,7 @@ let rootReducer = combineReducers({
     sideBar: sideBarReducer,
     usersPage: usersPageReducer,
     auth: AuthReducer,
+    form: formReducer,// обязательное имея свойства store -> form
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>// дай мне возвращаемый тип, и возьми его из rootReducer
