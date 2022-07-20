@@ -1,47 +1,27 @@
 import c from './Dialogs.module.css'
 import {DialogsItem,} from "./DialogsItem/DialogsItem";
 import {MessageItem,} from "./MessageItem/MessageItem";
-import React, {ChangeEvent, KeyboardEvent} from "react";
+import React from "react";
 import {DialogsPageType} from "../../redux/DialoguesPageReducer";
+import {FormMessageType, MessageForm} from "./MessageForm/MessageForm";
 
 export type DialogsPropsType = {
-    updateMessage: (newMessage: string) => void
     addMessage: (message: string) => void
     items: DialogsPageType
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
-    let textareaValue = React.createRef<any>();
 
-    const addMessageHandler = () => {
-        let newMessage = textareaValue.current.value
-        props.addMessage(newMessage)
+    const addMessageHandler = (formData: FormMessageType) => {
+        console.log(formData)
+        props.addMessage(formData.message)
     }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateMessage(e.currentTarget.value)
-    }
-
-    const onKeyHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-            addMessageHandler()
-        }
-    }
-
     return (
         <div className={c.dialogs}>
-            <DialogsItem dialogsData={props.items.dialogsData}/>
+           <DialogsItem dialogsData={props.items.dialogsData}/>
             <div className={c.messages}>
                 <MessageItem messagesData={props.items.messagesData}/>
-                <textarea className={c.textarea}
-                          onKeyPress={onKeyHandler}
-                          onChange={onChangeHandler}
-                          value={props.items.newMessage}
-                          placeholder='Next string = ctrEnter'
-                          ref={textareaValue}
-                />
-                <button onClick={addMessageHandler} className={c.button}>add Message</button>
-
+                <MessageForm  onSubmit={addMessageHandler}/>
             </div>
 
         </div>

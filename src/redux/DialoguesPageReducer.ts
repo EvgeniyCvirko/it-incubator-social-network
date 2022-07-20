@@ -14,10 +14,8 @@ export type MessagesData = {
     message: string,
 }
 type ActionTypeDialogsPage =
-    ReturnType<typeof AddMessageAC> |
-    ReturnType<typeof updateMessageAC>
+    ReturnType<typeof AddMessageAC>
 const Add_Message = 'Add_Message';
-const Update_Message = 'Update_Message';
 let initialState = {
     dialogsData: [
         {id: 1, name: 'Sasha'},
@@ -47,10 +45,7 @@ export const dialogsPageReducer = (state: DialogsPageType = initialState, action
                 stateCopy.messagesData = [...stateCopy.messagesData, newMessage]
                 return stateCopy;
             }
-            case (Update_Message): {
-                let stateCopy = {...state, newMessage: action.newMessage}
-                return stateCopy;
-            }
+
         }
     return state;
 }
@@ -58,11 +53,5 @@ export const AddMessageAC = (message: string) => {
     return {
         type: "Add_Message",
         message: message
-    } as const
-}
-export const updateMessageAC = (newMessage: string) => {
-    return {
-        type: "Update_Message",
-        newMessage: newMessage
     } as const
 }

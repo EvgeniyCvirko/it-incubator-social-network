@@ -5,7 +5,7 @@ export type MessageItemPropsType={
 }
 
 export const MessageItem = (props:MessageItemPropsType) => {
-    let messageItem = props.messagesData.map(e => <p className={c.message}>{e.message}</p> )
+    let messageItem = props.messagesData.map((e,i) => <p className={c.message} key={i}>{e.message}</p> )
     return (
         <div >
             {messageItem}

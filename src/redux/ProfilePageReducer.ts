@@ -14,7 +14,6 @@ export type PostsType = {
     count: number,
 }
 export type ActionProfilePageType = ReturnType<typeof addPostAC>
-   | ReturnType<typeof UpdateNewPosAC>
    | ReturnType<typeof setUsersProfile>
    | ReturnType<typeof setUserStatus>
 
@@ -84,8 +83,6 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
                 count: 25,
             }
             return {...state, posts: [...state.posts, newPost]};
-        case "UpdateNewPost":
-            return {...state, newPostText: action.newText};
         case "SetUserProfile":
             return {...state, profile: action.profile }
         case "SetUserStatus":
@@ -94,7 +91,6 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
     return state;
 }
 export const addPostAC = (text: string | undefined) => ({type: "AddPost",post: text} as const)
-export const UpdateNewPosAC = (newMessage: string) => ({type: "UpdateNewPost", newText: newMessage} as const);
 export const setUserStatus = (status: string) => ({type: "SetUserStatus", status} as const);
 export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
 
