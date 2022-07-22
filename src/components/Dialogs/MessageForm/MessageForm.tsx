@@ -7,7 +7,7 @@ import {maxLengthCreator, required} from "../../../util/valodator/validators";
 export type FormMessageType = {
     message: string
 }
-const maxLengthMessage10 = maxLengthCreator(10)
+const maxLengthMessage10 = maxLengthCreator(50)
 
 export const AddMessage: React.FC<InjectedFormProps<FormMessageType>> = (props) => {
 
