@@ -20,14 +20,13 @@ export const AuthReducer = (state: AuthType = initialState, action: ActionAuthTy
             return {
                 ...state,
                 ...action.data,
-                isAuth:true,
                 userId: action.data.userId
             };
     }
     return state;
 }
-export const setUserData = (userId: string, email: string, login: string) => ({
-    type: "SetUserData", data:{userId,email,login}
+export const setUserData = (userId: string, email: string, login: string, isAuth: boolean) => ({
+    type: "SetUserData", data:{userId,email,login, isAuth}
 } as const);
 
 export const getAuthentication = () =>{
@@ -35,7 +34,28 @@ export const getAuthentication = () =>{
         authAPI.getAuth().then(data =>{
             if(data.resultCode === 0){
                 let {id, login, email } = data.data
-                dispatch(setUserData(id,email,login))
+                dispatch(setUserData(id,email,login, true))
+            }
+        })
+    }
+}
+
+export const login = (email:string, password:string, rememberMe:boolean) =>{
+    return (dispatch: Dispatch<ActionAuthType>) =>{
+        authAPI.postLogin(email, password, rememberMe).then(data =>{
+            if(data.resultCode === 0){
+                let {id, login, email } = data.data
+                dispatch(setUserData(id,email,login, true))
+            }
+        })
+    }
+}
+
+export const logout = () =>{
+    return (dispatch: Dispatch<ActionAuthType>) =>{
+        authAPI.deleteLogin().then(data =>{
+            if(data.resultCode === 0){
+                dispatch(setUserData('','','', false))
             }
         })
     }

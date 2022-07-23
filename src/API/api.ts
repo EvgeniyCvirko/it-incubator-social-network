@@ -33,7 +33,18 @@ export const authAPI = {
         return instance.get(`auth/me`).then(response => {
             return response.data
         })
+    },
+    postLogin(email:string, password:string, rememberMe:boolean){
+        return instance.post(`auth/login`,{email, password, rememberMe}).then(response => {
+            return response.data
+        })
+    },
+    deleteLogin(){
+        return instance.delete(`auth/login`).then(response => {
+            return response.data
+        })
     }
+
 }
 export const profileAPI = {
     getProfile(userId:string){
