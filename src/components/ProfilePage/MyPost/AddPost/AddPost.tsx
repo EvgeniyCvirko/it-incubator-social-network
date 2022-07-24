@@ -11,7 +11,6 @@ type AddPostPropsType = {
 export const AddPost = (props: AddPostPropsType ) => {
 
     const addNewPost = (formData: FormPostType) => {
-        console.log(formData)
         props.addPost(formData.post)
     }
 

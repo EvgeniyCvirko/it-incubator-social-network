@@ -1,4 +1,5 @@
 import React from "react";
+import s from'./Login.module.css'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../common/FormControl/FormControl";
 import {required} from "../../../util/valodator/validators";
@@ -21,10 +22,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field component={Input} name='rememberMe' type="checkbox"/> Remember me
             </div>
+            {props.error && <div className={s.error}>{props.error}</div>}
             <div>
                 <button>login</button>
             </div>
         </form>
     )
 }
-export const LoginReduxForm = reduxForm<FormDataType>({form: 'email'})(LoginForm)
+export const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
