@@ -13,7 +13,6 @@ export type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
     const addMessageHandler = (formData: FormMessageType) => {
-        console.log(formData)
         props.addMessage(formData.message)
     }
     return (

@@ -16,10 +16,10 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                 <Field component={Input} validate={[required]} name='email'  placeholder='Email'/>
             </div>
             <div>
-                <Field component={Input}  validate={[required]} name='password' placeholder='password' type='password'/>
+                <Field component={Input}  validate={[required]} name='password' placeholder='Password' type='password'/>
             </div>
             <div>
-                <Field component='input' name='rememberMe' type="checkbox"/> Remember me
+                <Field component={Input} name='rememberMe' type="checkbox"/> Remember me
             </div>
             <div>
                 <button>login</button>

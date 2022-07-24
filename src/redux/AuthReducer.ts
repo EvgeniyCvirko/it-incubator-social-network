@@ -20,7 +20,6 @@ export const AuthReducer = (state: AuthType = initialState, action: ActionAuthTy
             return {
                 ...state,
                 ...action.data,
-                userId: action.data.userId
             };
     }
     return state;
