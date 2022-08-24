@@ -3,7 +3,7 @@ import {Header} from "./Header";
 import {connect} from "react-redux";
 import {getAuthentication, logout} from "../../redux/AuthReducer";
 import {AppStateType} from "../../redux/redux_store";
-
+//types
 type MapStateToPropsType = {
     login: string
     isAuth: boolean
@@ -14,11 +14,11 @@ type mapDispatchToPropsPropsType = {
 }
 type HeaderContainerPropsType = MapStateToPropsType & mapDispatchToPropsPropsType
 
-
+//component
 class HeaderContainer extends React.Component <HeaderContainerPropsType,MapStateToPropsType > {
-    componentDidMount() {
-        this.props.getAuthentication()
-    }
+    // componentDidMount() {
+    //     this.props.getAuthentication()
+    // }
 
     render() {
         return <Header {...this.props}/>
