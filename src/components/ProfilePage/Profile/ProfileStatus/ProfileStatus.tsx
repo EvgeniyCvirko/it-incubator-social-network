@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileStatus.module.css'
 
 type ProfileStatusPropsType ={
@@ -6,55 +6,39 @@ type ProfileStatusPropsType ={
     updateStatus: (status: string) => void
 }
 
-export class ProfileStatus extends React.Component<ProfileStatusPropsType> {
+export const ProfileStatus = (props:ProfileStatusPropsType)=> {
+    let [editeMode, setEditMode] = useState<boolean>(false)
+    let [status, setStatus] = useState<string>(props.status)
 
-    state = {
-        editeMode:false,
-        status: this.props.status
-    }
-    onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-
-        this.setState({
-            status: e.currentTarget.value
-        })
-        console.log( typeof(this.state.status))
+    const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.currentTarget.value)
     }
 
-    activatedInput = () => {  //объявил метод стрелочной функцией
-        this.setState({
-            editeMode: true
-        })
+    const activatedInput = () => {
+        setEditMode(true)
     }
-    deActivatedInput (){  //обязательно привязать контекст this.deActivatedInput.bind(this)
-        this.setState({
-            editeMode: false,
-        })
-        this.props.updateStatus(this.state.status)
+    const deActivatedInput = () => {
+        setEditMode(false)
+        props.updateStatus(status)
     }
 
-    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
-    if(prevProps.status !== this.props.status){
-        this.setState({
-            status: this.props.status
-        })
+    /*const componentDidUpdate = (prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) => {
+    if(prevProps.status !== props.status){
+        setStatus(props.status)
     }
-
-    }
-
-    render(){
+    }*/
 
        return ( <div className={s.profileStatus}>
-               {this.state.editeMode
+               {editeMode
                ?
                <div>
-                   status: <input onChange={this.onChangeHandler} autoFocus={true} onBlur={this.deActivatedInput.bind(this)} value={this.state.status}/>
+                   status: <input onChange={onChangeHandler} autoFocus={true} onBlur={deActivatedInput.bind(this)} value={status}/>
                </div>
                :
                <div>
-                   <span onClick={this.activatedInput}> status: {this.props.status}</span>
+                   <span onClick={activatedInput}> status: {props.status}</span>
                </div>
                }
            </div>
        )
-    }
 }
