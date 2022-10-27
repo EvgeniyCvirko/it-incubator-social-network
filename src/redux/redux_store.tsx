@@ -8,9 +8,6 @@ import  thunkMiddleware, { ThunkAction } from "redux-thunk";
 import {reducer as formReducer} from "redux-form"
 import {AppReducer} from "./AppReducer";
 
-
-
-
 let rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
