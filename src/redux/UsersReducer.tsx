@@ -85,7 +85,7 @@ export const setIsFetching = (isFetching: boolean) => ({type: "SetToggleFetching
 export const setFollowingInProgress = ( userId:string, isFollowing: boolean) => ({type: "SetFollowingInProgress", userId, isFollowing} as const);
 export const setUsers = (users: UsersType[]) => ({type: "SetUsers", users} as const);
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch<ActionUsersPageType>) => {
         dispatch(setIsFetching(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
