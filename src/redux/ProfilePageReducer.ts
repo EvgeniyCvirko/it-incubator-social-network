@@ -82,7 +82,7 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
                 message: action.post,
                 count: 25,
             }
-            return {...state, posts: [...state.posts, newPost]};
+            return {...state, posts: [ newPost,...state.posts]};
         case "SetUserProfile":
             return {...state, profile: action.profile }
         case "SetUserStatus":
