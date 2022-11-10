@@ -84,37 +84,34 @@ export const setIsFetching = (isFetching: boolean) => ({type: "SetToggleFetching
 export const setFollowingInProgress = ( userId:string, isFollowing: boolean) => ({type: "SetFollowingInProgress", userId, isFollowing} as const);
 export const setUsers = (users: UsersType[]) => ({type: "SetUsers", users} as const);
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
-    return (dispatch: Dispatch<ActionUsersPageType>) => {
+export const requestUsers = (currentPage: number, pageSize: number) =>
+    async (dispatch: Dispatch<ActionUsersPageType>) => {
         dispatch(setIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+       const data = await usersAPI.getUsers(currentPage, pageSize)
             dispatch(setUsers(data.items))
             dispatch(setIsFetching(false))
             dispatch(setTotalUsersCount(150))
-        })
     }
 
-}
 
-export const followUser = (userId: string) =>{
-    return (dispatch: Dispatch<ActionUsersPageType>) => {
+
+export const followUser = (userId: string) =>
+    async (dispatch: Dispatch<ActionUsersPageType>) => {
         dispatch(setFollowingInProgress(userId,true))
-        usersAPI.postUsers(userId).then(data => {
+        const data = await usersAPI.postUsers(userId)
             if(data.resultCode === 0) {
                 dispatch(changeFollowed(userId))
             }
             dispatch(setFollowingInProgress(userId,false))
-        })
     }
-}
-export const unFollowUser = (userId: string) =>{
-    return (dispatch: Dispatch<ActionUsersPageType>) => {
+
+export const unFollowUser = (userId: string) =>
+    async (dispatch: Dispatch<ActionUsersPageType>) => {
         dispatch(setFollowingInProgress(userId,true))
-        usersAPI.deleteUsers(userId).then(data => {
+        const data = await usersAPI.deleteUsers(userId)
             if(data.resultCode === 0) {
                 dispatch(changeUnFollowed(userId))
             }
             dispatch(setFollowingInProgress(userId,false))
-        })
     }
-}
+

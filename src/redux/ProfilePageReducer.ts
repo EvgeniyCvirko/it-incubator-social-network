@@ -94,28 +94,25 @@ export const addPostAC = (text: string | undefined) => ({type: "AddPost",post: t
 export const setUserStatus = (status: string) => ({type: "SetUserStatus", status} as const);
 export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
 
-export const getProfile = (userId:string) => {
-    return (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
-        profileAPI.getProfile(userId).then(data => {
-            dispatch(setUsersProfile(data))
-        })
+export const getProfile = (userId:string) =>
+    async (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
+        const res = await profileAPI.getProfile(userId)
+            dispatch(setUsersProfile(res))
     }
-}
 
-export const getUserStatus = (userId:string) => {
-    return (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
-        profileAPI.getUserStatus(userId).then(response => {
-            dispatch(setUserStatus(response.data))
-        })
+
+export const getUserStatus = (userId:string) =>
+    async (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
+        const res = await profileAPI.getUserStatus(userId)
+            dispatch(setUserStatus(res.data))
     }
-}
 
-export const updateUserStatus = (status:string) => {
-    return (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
-        profileAPI.updateUserStatus(status).then(response =>{
-            if(response.data.resultCode === 0 ) {
+
+export const updateUserStatus = (status:string) =>
+    async (dispatch : Dispatch<ReturnType<typeof setUserStatus>>) => {
+        const res = await profileAPI.updateUserStatus(status)
+            if(res.data.resultCode === 0 ) {
                 dispatch(setUserStatus(status))
             }
-        })
     }
-}
+
