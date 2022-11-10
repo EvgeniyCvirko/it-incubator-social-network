@@ -19,7 +19,7 @@ export type UsersType = {
     status: string
     location: LocationType
 }
-type PhotosType = {
+export type PhotosType = {
     small:string | null
     large:string | null
 }
@@ -47,7 +47,6 @@ let initialState = {
 }
 
 export const usersPageReducer = (state: UsersPageType = initialState, action: ActionUsersPageType):UsersPageType => {
-
     switch (action.type) {
         case "Follow" :
             return {

@@ -17,6 +17,7 @@ export type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
+    console.log(props.followingInProgress)
     let page = []
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
     for (let i = 1; i <= pageCount; i++) {
@@ -24,8 +25,8 @@ export const Users = (props: UsersPropsType) => {
     }
     return (
         <div>
-            {page.map(p => {
-                return <span className={props.currentPage === p ? s.PageActive : s.Page} onClick={(e) => {
+            {page.map((p,i) => {
+                return <span key={i} className={props.currentPage === p ? s.PageActive : s.Page} onClick={(e) => {
                     props.onPageChanged(p)
                 }}>{p}</span>
             })}
