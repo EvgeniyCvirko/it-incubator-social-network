@@ -1,5 +1,5 @@
 import React from 'react';
-import {usersAPI} from "../API/api";
+import {responseFollowType, usersAPI} from "../API/api";
 import {Dispatch} from "redux";
 
 
@@ -93,25 +93,23 @@ export const requestUsers = (currentPage: number, pageSize: number) =>
             dispatch(setTotalUsersCount(150))
     }
 
-
+const followUnfollow = async (dispatch: Dispatch<ActionUsersPageType>, userId: string, methodApi: (id: string) => Promise<responseFollowType>,
+                              action: ((IdUser: string) => { type: "Follow"; IdUser: string }) |( (IdUser: string) => { type: "UnFollow"; IdUser: string })) => {
+    dispatch(setFollowingInProgress(userId,true))
+    const data = await methodApi(userId)
+    if(data.resultCode === 0) {
+        dispatch(action(userId))
+    }
+    dispatch(setFollowingInProgress(userId,false))
+}
 
 export const followUser = (userId: string) =>
-    async (dispatch: Dispatch<ActionUsersPageType>) => {
-        dispatch(setFollowingInProgress(userId,true))
-        const data = await usersAPI.postUsers(userId)
-            if(data.resultCode === 0) {
-                dispatch(changeFollowed(userId))
-            }
-            dispatch(setFollowingInProgress(userId,false))
+    (dispatch: Dispatch<ActionUsersPageType>) => {
+        followUnfollow(dispatch, userId, usersAPI.followUser.bind(userId),changeFollowed)
     }
 
 export const unFollowUser = (userId: string) =>
     async (dispatch: Dispatch<ActionUsersPageType>) => {
-        dispatch(setFollowingInProgress(userId,true))
-        const data = await usersAPI.deleteUsers(userId)
-            if(data.resultCode === 0) {
-                dispatch(changeUnFollowed(userId))
-            }
-            dispatch(setFollowingInProgress(userId,false))
+        followUnfollow(dispatch, userId, usersAPI.unfollowUser.bind(userId), changeUnFollowed)
     }
 

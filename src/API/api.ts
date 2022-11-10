@@ -16,13 +16,13 @@ export const usersAPI = {
             return response.data
         })
     },
-    postUsers(id: string){
-      return instance.post(`follow/${id}`, {}).then(response => {
+    followUser(id: string){
+      return instance.post<responseFollowType>(`follow/${id}`, {}).then(response => {
           return response.data
       })
     },
-    deleteUsers(id: string){
-        return instance.delete(`follow/${id}`, {}).then(response => {
+    unfollowUser(id: string){
+        return instance.delete<responseFollowType>(`follow/${id}`, {}).then(response => {
             return response.data
         })
     }
@@ -58,3 +58,8 @@ export const profileAPI = {
     },
 }
 
+export type responseFollowType ={
+    resultCode: number,
+    messages: string [],
+    data: {}
+}
