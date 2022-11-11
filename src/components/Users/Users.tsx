@@ -3,6 +3,7 @@ import {UsersType} from "../../redux/UsersReducer";
 import photoUser from '../../redux/Icon/User.svg.png'
 import s from './Users.module.css'
 import {NavLink} from "react-router-dom";
+import {Pagination} from '../common/pagination/Pagination';
 
 export type UsersPropsType = {
     items: UsersType[]
@@ -17,19 +18,22 @@ export type UsersPropsType = {
 }
 
 export const Users = (props: UsersPropsType) => {
-    console.log(props.followingInProgress)
-    let page = []
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
-    for (let i = 1; i <= pageCount; i++) {
-        page.push(i)
-    }
+    // let page = []
+    // let pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    // for (let i = 1; i <= pageCount; i++) {
+    //     page.push(i)
+    // }
     return (
         <div>
-            {page.map((p,i) => {
-                return <span key={i} className={props.currentPage === p ? s.PageActive : s.Page} onClick={(e) => {
-                    props.onPageChanged(p)
-                }}>{p}</span>
-            })}
+          <Pagination currentPage={props.currentPage}
+                      onPageChanged={props.onPageChanged}
+                      pageSize={props.pageSize}
+                      totalUsersCount={props.totalUsersCount}/>
+            {/*{page.map((p,i) => {*/}
+            {/*    return <span key={i} className={props.currentPage === p ? s.PageActive : s.Page} onClick={(e) => {*/}
+            {/*        props.onPageChanged(p)*/}
+            {/*    }}>{p}</span>*/}
+            {/*})}*/}
             {
                 props.items.map(u => {
                     const followedHandler = () => props.followUser(u.id)
