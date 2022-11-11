@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import s from "../../Users/Users.module.css";
 
 type PanaginationType ={
@@ -6,26 +6,46 @@ type PanaginationType ={
     totalUsersCount: number,
     pageSize: number,
     onPageChanged: (page: number) => void
-    portionSize: number
-}
+    }
 
-export const Pagination = (props:PanaginationType) =>{
+export const Pagination: React.FC<PanaginationType> = ({pageSize,totalUsersCount,currentPage,onPageChanged}) =>{
     const page = []
-    console.log(props.totalUsersCount, props.pageSize )
-    const pageCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    const pageCount = Math.ceil(totalUsersCount / pageSize)
     for (let i = 1; i <= pageCount; i++) {
         page.push(i)
     }
-    const potionCount = Math.ceil(props.totalUsersCount / props.portionSize)
-    const [portionNumber, setPortionNumber] = useState<number>(1)
-    const leftPage = (props.currentPage - 1)
+    const previousClickHandler = () => {
+        (currentPage - 10 < 1) ? onPageChanged(1) : onPageChanged(currentPage - 10)
+    }
 
+    const nextClickHandler = () => {
+        (currentPage + 10 > pageCount) ? onPageChanged(pageCount) : onPageChanged(currentPage + 10)
+    }
+
+    const endPageHandler = () => onPageChanged(pageCount)
+
+    let renderPage
+    if (0 < currentPage &&  currentPage < 6) {
+        renderPage = page.filter(p => p >= 1 && p <= 11 )
+    } else {
+        renderPage = page.filter( p => ( p >= currentPage -5 && p<= currentPage + 5))
+    }
     return (<div>
-        {page.map((p,i) => {
-            return <span key={i} className={props.currentPage === p ? s.PageActive : s.Page} onClick={(e) => {
-                props.onPageChanged(p)
+        {
+          currentPage > 6 ?
+          < button onClick={previousClickHandler}>prv</button> : null
+        }
+        {renderPage.map((p, i) => {
+            return <span key={i} className={currentPage === p ? s.PageActive : s.Page} onClick={(e) => {
+                onPageChanged(p)
             }}>{p}</span>
-        })}
+        })
+        }
+        {
+          currentPage + 5 <= pageCount ?
+              <button onClick={nextClickHandler}>next</button> : null
+        }
+        <button onClick={endPageHandler}>end page</button>
     </div>)
 
 }
