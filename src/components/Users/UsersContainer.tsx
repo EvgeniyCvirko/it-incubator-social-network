@@ -19,7 +19,7 @@ import {
 } from "../../redux/UsersSelectors";
 
 type MapSateToPropsType = {
-    items: UsersType[]
+    users: UsersType[]
     pageSize: number
     totalUsersCount: number
     isFetching: boolean
@@ -28,7 +28,7 @@ type MapSateToPropsType = {
 }
 
 type UsersPropsType = {
-    items: UsersType[]
+    users: UsersType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -57,7 +57,7 @@ class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
-                   items={this.props.items}
+                   users={this.props.users}
                    onPageChanged={this.onPageChanged}
                    followUser={this.props.followUser}
                    unFollowUser={this.props.unFollowUser}
@@ -70,7 +70,7 @@ class UsersContainer extends React.Component<UsersPropsType, UsersType[]> {
 
 let mapSateToProps = (state: AppStateType): MapSateToPropsType => {
     return {
-        items: getUsers(state),
+        users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
