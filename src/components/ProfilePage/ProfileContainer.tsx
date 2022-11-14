@@ -34,8 +34,7 @@ type MapSateToPropsType = {
 }
 
 class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
-
-    componentDidMount() {
+    componentRefresh() {
         let userId = this.props.match.params.userId
         if(!userId){
             userId = this.props.myId
@@ -43,6 +42,15 @@ class ProfileContainer extends React.Component<PropsType, ProfilePageType>{
         this.props.getProfile(userId)
         this.props.getUserStatus(userId)
     }
+    componentDidMount() {
+        this.componentRefresh()
+    }
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<ProfilePageType>) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.componentRefresh()
+        }
+    }
+
     render(){
         return <ProfilePage profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateUserStatus}
         />
