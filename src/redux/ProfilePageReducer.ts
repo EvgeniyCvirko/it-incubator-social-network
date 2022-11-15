@@ -16,6 +16,7 @@ export type PostsType = {
 export type ActionProfilePageType = ReturnType<typeof addPostAC>
    | ReturnType<typeof setUsersProfile>
    | ReturnType<typeof setUserStatus>
+   | ReturnType<typeof savePhotoAvatar>
 
 export type ProfileType = {
     userId: number
@@ -87,12 +88,16 @@ export const profilePageReducer = (state: ProfilePageType = initialState, action
             return {...state, profile: action.profile }
         case "SetUserStatus":
             return {...state, status: action.status }
+        case "SaveAvatarPhoto":
+            return {...state,
+               profile:{...state.profile, photos: action.file} }
     }
     return state;
 }
 export const addPostAC = (text: string | undefined) => ({type: "AddPost",post: text} as const)
 export const setUserStatus = (status: string) => ({type: "SetUserStatus", status} as const);
 export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
+export const savePhotoAvatar = (file: PhotosProfileType) => ({type: "SaveAvatarPhoto", file} as const);
 
 export const getProfile = (userId:string) =>
     async (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
@@ -115,4 +120,13 @@ export const updateUserStatus = (status:string) =>
                 dispatch(setUserStatus(status))
             }
     }
+
+export const savePhoto = (file:File) =>
+  async (dispatch : Dispatch<ReturnType<typeof savePhotoAvatar>>) => {
+      const res = await profileAPI.savePhoto(file)
+      if(res.data.resultCode === 0 ) {
+          dispatch(savePhotoAvatar(res.data.data.photos))
+      }else {
+          console.log(res.data)}
+  }
 
