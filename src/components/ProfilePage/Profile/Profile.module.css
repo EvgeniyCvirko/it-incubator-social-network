@@ -1,0 +1,23 @@
+.profile {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 2fr 10fr;
+    grid-template-columns: 2fr 10fr;
+    grid-template-areas: "a l";
+}
+
+img {
+    width: 30px;
+}
+
+.description {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: l;
+}
+.description li {
+    margin:0 25px 10px 15px ;
+    color: black;
+    font-size: 20px;
+    list-style: none;
+}

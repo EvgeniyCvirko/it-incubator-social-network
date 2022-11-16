@@ -19,6 +19,7 @@ let startState ={
         lookingForAJob: true,
         lookingForAJobDescription: '',
         fullName: 'Evgeniy Cvirko',
+        aboutMe: '111',
         contacts:{
             github: 'https://github.com/EvgeniyCvirko',
             vk: 'https://vk.com',
@@ -57,6 +58,7 @@ test('Profile should be after set users', () =>{
         lookingForAJob: false,
         lookingForAJobDescription: '',
         fullName: "Alex",
+        aboutMe: '111',
         contacts:{} as ContactsProfileType,
         photos: {} as PhotosProfileType,
     }
