@@ -1,5 +1,4 @@
 import React from 'react';
-import './Profile/Profile.css';
 import {Header} from './Header/Header';
 import {Profile} from './Profile/Profile';
 import {MyPostContainer} from './MyPost/MyPostContainer';

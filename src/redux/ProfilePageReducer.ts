@@ -25,6 +25,7 @@ export type ProfileType = {
     fullName: string
     contacts:ContactsProfileType
     photos: PhotosProfileType
+    aboutMe: string
 }
 export type ContactsProfileType ={
     github: string
@@ -53,6 +54,7 @@ let initialState ={
         lookingForAJob: true,
         lookingForAJobDescription: '',
         fullName: 'Evgeniy Cvirko',
+        aboutMe: 'I am front-end-developer',
         contacts:{
             github: 'https://github.com/EvgeniyCvirko',
             vk: 'https://vk.com',
