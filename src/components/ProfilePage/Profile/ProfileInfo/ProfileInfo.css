@@ -1,3 +1,7 @@
+
+.profileForm{
+    width: 175px;
+}
 .error {
     border: 2px solid red;
     color: red;

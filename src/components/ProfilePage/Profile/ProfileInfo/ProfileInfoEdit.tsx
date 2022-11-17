@@ -1,5 +1,6 @@
 import React from 'react';
 import s from'../../../Login/LoginForm/Login.module.css'
+import './ProfileInfo.css'
 import {ProfileType} from '../../../../redux/ProfilePageReducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input, Textarea} from '../../../common/FormControl/FormControl';
@@ -13,8 +14,7 @@ export const ProfileInfoEdit: React.FC<InjectedFormProps<ProfileType, ProfileInf
 const {error, handleSubmit,profile} = props
   return (
 
-    <form onSubmit={handleSubmit}>
-      Edit
+    <form onSubmit={handleSubmit} className='profileForm'>
       <div>
         <b>Full name:</b>
         <Field component={Input} validate={[required]} name="fullName"/>
@@ -31,7 +31,7 @@ const {error, handleSubmit,profile} = props
         <b>My professional skills:</b>
         <Field component={Textarea}  validate={[required]} name='lookingForAJobDescription'/>
       </div>
-      {error && <div className={s.error}>{error}</div>}
+      {error && <div className='error'>{error}</div>}
       <div>
         <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
         return <div key={key} className={s.contact}>
