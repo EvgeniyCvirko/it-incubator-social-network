@@ -1,5 +1,5 @@
 import React from 'react';
-import {responseFollowType, usersAPI} from "../API/api";
+import {ResponseType, usersAPI} from '../API/api';
 import {Dispatch} from "redux";
 
 
@@ -93,7 +93,7 @@ export const requestUsers = (currentPage: number, pageSize: number) =>
             dispatch(setTotalUsersCount(data.totalCount))
     }
 
-const followUnfollow = async (dispatch: Dispatch<ActionUsersPageType>, userId: string, methodApi: (id: string) => Promise<responseFollowType>,
+const followUnfollow = async (dispatch: Dispatch<ActionUsersPageType>, userId: string, methodApi: (id: string) => Promise<ResponseType>,
                               action: ((IdUser: string) => { type: "Follow"; IdUser: string }) |( (IdUser: string) => { type: "UnFollow"; IdUser: string })) => {
     dispatch(setFollowingInProgress(userId,true))
     const data = await methodApi(userId)

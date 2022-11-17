@@ -7,7 +7,7 @@ import {Contacts} from './ProfileInfo/Contacts/Contacts';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {ProfileInfoEditForm} from './ProfileInfo/ProfileInfoEdit';
 
-type DataPropsType = {
+type ProfilePropsType = {
   profile: ProfileType
   status: string
   updateStatus: (status: string) => void
@@ -15,7 +15,7 @@ type DataPropsType = {
   savePhoto:(file: File) => void
 }
 
-export const Profile: React.FC<DataPropsType> = ({profile, status,updateStatus, isOwn,savePhoto}) => {
+export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatus, isOwn,savePhoto, updateProfile}) => {
   const [editMode, setEditMode] = useState<boolean>(false)
   const onChangeAvatar = (e: ChangeEvent<HTMLInputElement>) =>{
     if (e.target.files) {

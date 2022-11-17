@@ -1,6 +1,6 @@
 import axios from "axios";
 import {UsersType} from '../redux/UsersReducer';
-import {PhotosProfileType} from '../redux/ProfilePageReducer';
+import {PhotosProfileType, ProfileType} from '../redux/ProfilePageReducer';
 
 
 const instance = axios.create({
@@ -19,12 +19,12 @@ export const usersAPI = {
         })
     },
     followUser(id: string){
-      return instance.post<responseFollowType>(`follow/${id}`, {}).then(response => {
+      return instance.post<ResponseType>(`follow/${id}`, {}).then(response => {
           return response.data
       })
     },
     unfollowUser(id: string){
-        return instance.delete<responseFollowType>(`follow/${id}`, {}).then(response => {
+        return instance.delete<ResponseType>(`follow/${id}`, {}).then(response => {
             return response.data
         })
     }
@@ -61,7 +61,7 @@ export const profileAPI = {
     savePhoto(file: File){
         const formData = new FormData()
         formData.append('image', file)
-        return instance.put<responseSavePhoto>(`profile/photo`, formData, {
+        return instance.put<ResponseType<{photos:PhotosProfileType }>>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -69,17 +69,10 @@ export const profileAPI = {
     },
 }
 
-export type responseFollowType ={
+export type ResponseType<D = {}> ={
     resultCode: number,
     messages: string [],
-    data: {}
-}
-export type responseSavePhoto ={
-    data: {
-        photos:PhotosProfileType
-    } ,
-    resultCode: number,
-    messages: string [],
+    data: D
 }
 
 export type responseGetUsersType ={
