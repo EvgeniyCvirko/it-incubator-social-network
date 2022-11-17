@@ -33,7 +33,11 @@ const {error, handleSubmit,profile} = props
       </div>
       {error && <div className={s.error}>{error}</div>}
       <div>
-        <button >save</button>
+        <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+        return <div key={key} className={s.contact}>
+          <b>{key}: <Field component={Input} validate={[]} name={`contacts.${key}`}/></b>
+        </div>
+      })}
       </div>
       <div>
         <button >save</button>

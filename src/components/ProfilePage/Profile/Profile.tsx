@@ -39,8 +39,7 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
           <ProfileInfoEditForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> : <ProfileInfo profile={profile}/>
         }
       </div>
-      <b>Contacts:</b>
-      <Contacts contacts={profile.contacts}/>
+
       <ProfileStatus status={status} updateStatus={updateStatus}/>
 
     </div>
