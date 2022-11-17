@@ -67,6 +67,9 @@ export const profileAPI = {
             }
         })
     },
+    updateProfile(profile:ProfileType){
+        return instance.put<ResponseType>(`profile`,profile)
+    },
 }
 
 export type ResponseType<D = {}> ={

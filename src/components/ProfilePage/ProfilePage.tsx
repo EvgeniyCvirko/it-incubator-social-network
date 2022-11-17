@@ -10,6 +10,7 @@ type ProfilePropsType = {
   updateStatus: (status: string) => void
   isOwn: string,
   savePhoto:(file: File) => void
+  updateProfile: (newProfile:ProfileType) => void
 }
 
 export const ProfilePage = (props: ProfilePropsType) => {
@@ -20,7 +21,9 @@ export const ProfilePage = (props: ProfilePropsType) => {
                status={props.status}
                updateStatus={props.updateStatus}
                isOwn={props.isOwn}
-               savePhoto={props.savePhoto}/>
+               savePhoto={props.savePhoto}
+               updateProfile={props.updateProfile}
+      />
       <MyPostContainer/>
     </div>
   )

@@ -132,3 +132,12 @@ export const savePhoto = (file:File) =>
           console.log(res.data)}
   }
 
+  export const updateProfile = (newProfile:ProfileType) =>
+  async (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
+      const res = await profileAPI.updateProfile(newProfile)
+      if(res.data.resultCode === 0 ) {
+          dispatch(setUsersProfile(newProfile))
+      }else {
+          console.log(res.data)}
+  }
+

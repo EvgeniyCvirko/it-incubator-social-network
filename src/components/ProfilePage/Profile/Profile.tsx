@@ -3,7 +3,6 @@ import s from './Profile.module.css';
 import {Avatar} from './Avatar/Avatar';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ProfileType} from '../../../redux/ProfilePageReducer';
-import {Contacts} from './ProfileInfo/Contacts/Contacts';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {ProfileInfoEditForm} from './ProfileInfo/ProfileInfoEdit';
 
@@ -13,6 +12,7 @@ type ProfilePropsType = {
   updateStatus: (status: string) => void
   isOwn:string
   savePhoto:(file: File) => void
+  updateProfile: (newProfile:ProfileType) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatus, isOwn,savePhoto, updateProfile}) => {
@@ -25,7 +25,8 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
   const editClickHandler = () => {
     setEditMode(true)
   }
-  const onSubmit = () =>{
+  const onSubmit = (newProfile:ProfileType ) =>{
+    updateProfile(newProfile)
     setEditMode(false)
   }
   return (
@@ -35,7 +36,7 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
       <div className={s.description}>
         <button onClick={editClickHandler}>Edit profile</button>
         {editMode ?
-          <ProfileInfoEditForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> : <ProfileInfo info={profile}/>
+          <ProfileInfoEditForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> : <ProfileInfo profile={profile}/>
         }
       </div>
       <b>Contacts:</b>

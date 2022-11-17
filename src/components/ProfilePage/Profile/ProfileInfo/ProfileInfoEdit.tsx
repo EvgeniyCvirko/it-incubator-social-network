@@ -10,7 +10,7 @@ type ProfileInfoPropsType = {
 }
 
 export const ProfileInfoEdit: React.FC<InjectedFormProps<ProfileType, ProfileInfoPropsType> & ProfileInfoPropsType> = (props) => {
-const {error, handleSubmit} = props
+const {error, handleSubmit,profile} = props
   return (
 
     <form onSubmit={handleSubmit}>
@@ -32,6 +32,9 @@ const {error, handleSubmit} = props
         <Field component={Textarea}  validate={[required]} name='lookingForAJobDescription'/>
       </div>
       {error && <div className={s.error}>{error}</div>}
+      <div>
+        <button >save</button>
+      </div>
       <div>
         <button >save</button>
       </div>
