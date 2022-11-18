@@ -43,7 +43,7 @@ export type PhotosProfileType ={
 }
 
 
-let initialState ={
+/*let initialState ={
     posts: [
         {id: v1(), message: 'Hey, why nobody love me?', count: 100},
         {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
@@ -73,9 +73,20 @@ let initialState ={
     },
     newPostText: '',
     status: '',
+}*/
+
+let initialState ={
+    posts: [
+        {id: v1(), message: 'Hey, why nobody love me?', count: 100},
+        {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
+        {id: v1(), message: 'Ho-ho-ho', count: 50},
+    ],
+    profile: null as ProfileType | null,
+    newPostText: '',
+    status: '',
 }
 
-export const profilePageReducer = (state: ProfilePageType = initialState, action: ActionProfilePageType) => {
+export const profilePageReducer = (state = initialState, action: ActionProfilePageType) => {
 
     switch (action.type) {
 
@@ -101,7 +112,7 @@ export const setUserStatus = (status: string) => ({type: "SetUserStatus", status
 export const setUsersProfile = (profile: ProfileType) => ({type: "SetUserProfile", profile} as const);
 export const savePhotoAvatar = (file: PhotosProfileType) => ({type: "SaveAvatarPhoto", file} as const);
 
-export const getProfile = (userId:string) =>
+export const getProfile = (userId:number) =>
     async (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
         const res = await profileAPI.getProfile(userId)
             dispatch(setUsersProfile(res))

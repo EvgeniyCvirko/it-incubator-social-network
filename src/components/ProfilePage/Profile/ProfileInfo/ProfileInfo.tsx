@@ -17,8 +17,8 @@ export const ProfileInfo = (props: ProfileInfoPropsType) =>{
           <li><b>About me</b>: {props.profile.aboutMe}</li>
           <li><b>Looking for a job</b>: {
             props.profile.lookingForAJob ?
-              <img src={smileNo} alt=""/> :
-              <img src={smileYes} alt=""/>
+              <img src={smileYes} alt=""/> :
+              <img src={smileNo} alt=""/>
           }
           </li>
           <li><b>Looking for a job description:</b>{props.profile.lookingForAJobDescription}</li>

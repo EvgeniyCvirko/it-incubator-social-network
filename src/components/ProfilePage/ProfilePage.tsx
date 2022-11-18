@@ -5,12 +5,12 @@ import {MyPostContainer} from './MyPost/MyPostContainer';
 import {ProfileType} from '../../redux/ProfilePageReducer';
 
 type ProfilePropsType = {
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
   updateStatus: (status: string) => void
-  isOwn: string,
+  isOwn: boolean,
   savePhoto:(file: File) => void
-  updateProfile: (newProfile:ProfileType) => void
+  updateProfile: (profile: ProfileType) => Promise<any>
 }
 
 export const ProfilePage = (props: ProfilePropsType) => {
