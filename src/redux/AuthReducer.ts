@@ -15,12 +15,12 @@ type ThunkType = BaseThunkType<ActionAuthType | ReturnType<typeof stopSubmit>>
 //state
 let initialState = {
   isLoading: true,
-  userId: '',
-  email: '',
-  login: '',
+  userId: null as (number | null),
+  email: null as string | null,
+  login: null as string | null,
   isAuth: false,
 }
-export const AuthReducer = (state: AuthType = initialState, action: ActionAuthType) => {
+export const AuthReducer = (state = initialState, action: ActionAuthType) => {
   switch (action.type) {
     case "SetUserData":
       return {

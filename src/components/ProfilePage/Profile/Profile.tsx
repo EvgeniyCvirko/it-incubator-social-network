@@ -5,18 +5,24 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {ProfileType} from '../../../redux/ProfilePageReducer';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {ProfileInfoEditForm} from './ProfileInfo/ProfileInfoEdit';
+import {Loading} from '../../common/Loading';
 
 type ProfilePropsType = {
-  profile: ProfileType
+  profile: ProfileType | null
   status: string
   updateStatus: (status: string) => void
-  isOwn:string
+  isOwn:boolean
   savePhoto:(file: File) => void
   updateProfile: (newProfile:ProfileType) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatus, isOwn,savePhoto, updateProfile}) => {
   const [editMode, setEditMode] = useState<boolean>(false)
+
+  if (!profile) {
+    return <Loading/>
+  }
+
   const onChangeAvatar = (e: ChangeEvent<HTMLInputElement>) =>{
     if (e.target.files) {
       savePhoto(e.target.files[0])
@@ -32,7 +38,7 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
   return (
     <div className={s.profile}>
       <Avatar photos={profile.photos}/>
-      { (+isOwn === profile.userId) ? <input type={'file'} onChange={onChangeAvatar}/> : null}
+      { isOwn  ? <input type={'file'} onChange={onChangeAvatar}/> : null}
       <div className={s.description}>
         <button onClick={editClickHandler}>Edit profile</button>
         {editMode ?
