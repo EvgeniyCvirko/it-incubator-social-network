@@ -13,7 +13,7 @@ type ProfilePropsType = {
   updateStatus: (status: string) => void
   isOwn:boolean
   savePhoto:(file: File) => void
-  updateProfile: (newProfile:ProfileType) => void
+  updateProfile: (newProfile:ProfileType) => Promise<any>
 }
 
 export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatus, isOwn,savePhoto, updateProfile}) => {
@@ -40,7 +40,7 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
       <Avatar photos={profile.photos}/>
       { isOwn  ? <input type={'file'} onChange={onChangeAvatar}/> : null}
       <div className={s.description}>
-        <button onClick={editClickHandler}>Edit profile</button>
+        {isOwn  ? <button onClick={editClickHandler}>Edit profile</button> : null}
         {editMode ?
           <ProfileInfoEditForm initialValues={profile} profile={profile} onSubmit={onSubmit}/> : <ProfileInfo profile={profile}/>
         }

@@ -1,5 +1,4 @@
 import React from 'react';
-import s from'../../../Login/LoginForm/Login.module.css'
 import './ProfileInfo.css'
 import {ProfileType} from '../../../../redux/ProfilePageReducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
@@ -31,10 +30,9 @@ const {error, handleSubmit,profile} = props
         <b>My professional skills:</b>
         <Field component={Textarea}  validate={[required]} name='lookingForAJobDescription'/>
       </div>
-      {error && <div className='error'>{error}</div>}
       <div>
         <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-        return <div key={key} className={s.contact}>
+        return <div key={key} className='contact'>
           <b>{key}: <Field component={Input} validate={[]} name={`contacts.${key}`}/></b>
         </div>
       })}
