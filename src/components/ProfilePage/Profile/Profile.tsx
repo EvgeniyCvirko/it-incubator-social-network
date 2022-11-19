@@ -32,8 +32,10 @@ export const Profile: React.FC<ProfilePropsType> = ({profile, status,updateStatu
     setEditMode(true)
   }
   const onSubmit = (newProfile:ProfileType ) =>{
-    updateProfile(newProfile)
-    setEditMode(false)
+    updateProfile(newProfile).then(()=>{
+      setEditMode(false)
+    }
+    )
   }
   return (
     <div className={s.profile}>

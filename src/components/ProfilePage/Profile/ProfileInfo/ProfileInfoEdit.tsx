@@ -37,6 +37,7 @@ const {error, handleSubmit,profile} = props
         </div>
       })}
       </div>
+      {error && <div className='error'>{error}</div>}
       <div>
         <button >save</button>
       </div>

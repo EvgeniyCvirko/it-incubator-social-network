@@ -1,6 +1,8 @@
 import {v1} from "uuid";
 import {profileAPI} from "../API/api";
 import {Dispatch} from "redux";
+import {stopSubmit} from 'redux-form';
+import {BaseThunkType} from './redux_store';
 
 export type ProfilePageType = {
     posts: Array<PostsType>
@@ -144,12 +146,23 @@ export const savePhoto = (file:File) =>
           console.log(res.data)}
   }
 
-  export const updateProfile = (newProfile:ProfileType) =>
-  async (dispatch : Dispatch<ReturnType<typeof setUsersProfile>>) => {
+  export const updateProfile = (newProfile:ProfileType): ThunkType =>
+  async (dispatch ) => {
       const res = await profileAPI.updateProfile(newProfile)
       if(res.data.resultCode === 0 ) {
           dispatch(setUsersProfile(newProfile))
       }else {
-          console.log(res.data)}
+          const contact = res.data.messages.map(e => e.slice(30, e.length-1).toLowerCase())
+          console.log(contact)
+          //dispatch(stopSubmit('edit-profile', {_error:messages }))
+          /*contact.map((e,i) => {
+              dispatch(stopSubmit('edit-profile', {"contacts": {: res.data.messages[i]} }))
+              console.log({e : res.data.messages[0]})
+              return Promise.reject(res.data.messages[0])
+          })*/
+          dispatch(stopSubmit('edit-profile', {"contacts":{`${contact[0]}` : res.data.messages[0]} }))
+         //return Promise.reject(res.data.messages[0])
+
+      }
   }
 
