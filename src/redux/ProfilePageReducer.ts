@@ -4,12 +4,6 @@ import {Dispatch} from "redux";
 import {stopSubmit} from 'redux-form';
 import {BaseThunkType} from './redux_store';
 
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-    profile: ProfileType
-    status:string
-}
 export type PostsType = {
     id: string,
     message: string | undefined,
@@ -43,52 +37,22 @@ export type PhotosProfileType ={
     small: string | null
     large: string | null
 }
-
-
-/*let initialState ={
-    posts: [
-        {id: v1(), message: 'Hey, why nobody love me?', count: 100},
-        {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
-        {id: v1(), message: 'Ho-ho-ho', count: 50},
-    ],
-    profile: {
-        userId: 1,
-        lookingForAJob: true,
-        lookingForAJobDescription: '',
-        fullName: '',
-        aboutMe: '',
-        contacts:{
-            github: '',
-            vk: '',
-            facebook: '',
-            instagram: '',
-            twitter: '',
-            website: '',
-            youtube: '',
-            mainLink: '',
-        },
-        photos: {
-            small:'https://cdn.vectorstock.com/i/1000x1000/38/17/male-face-avatar-logo-template-pictograph-vector-11333817.webp',
-            large:'',
-        }
-
-    },
-    newPostText: '',
-    status: '',
-}*/
+type ThunkType = BaseThunkType<ActionProfilePageType | ReturnType<typeof stopSubmit>>
 
 let initialState ={
     posts: [
         {id: v1(), message: 'Hey, why nobody love me?', count: 100},
         {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
         {id: v1(), message: 'Ho-ho-ho', count: 50},
-    ],
+    ] as PostsType[],
     profile: null as ProfileType | null,
     newPostText: '',
     status: '',
 }
 
-export const profilePageReducer = (state = initialState, action: ActionProfilePageType) => {
+type InitialStateType = typeof initialState
+
+export const profilePageReducer = (state = initialState, action: ActionProfilePageType): InitialStateType => {
 
     switch (action.type) {
 
@@ -108,7 +72,6 @@ export const profilePageReducer = (state = initialState, action: ActionProfilePa
                profile:{...state.profile, photos: action.file} as ProfileType}
         default: return state;
     }
-    return state;
 }
 export const addPostAC = (text: string | undefined) => ({type: "AddPost",post: text} as const)
 export const setUserStatus = (status: string) => ({type: "SetUserStatus", status} as const);

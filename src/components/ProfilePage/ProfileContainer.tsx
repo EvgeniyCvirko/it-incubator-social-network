@@ -5,7 +5,6 @@ import React from 'react';
 import {
   getProfile,
   getUserStatus,
-  ProfilePageType,
   ProfileType, savePhoto, updateProfile,
   updateUserStatus
 } from '../../redux/ProfilePageReducer';
