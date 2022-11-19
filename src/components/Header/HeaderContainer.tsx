@@ -5,7 +5,7 @@ import {getAuthentication, logout} from "../../redux/AuthReducer";
 import {AppStateType} from "../../redux/redux_store";
 //types
 type MapStateToPropsType = {
-    login: string
+    login: string | null
     isAuth: boolean
 }
 type mapDispatchToPropsPropsType = {

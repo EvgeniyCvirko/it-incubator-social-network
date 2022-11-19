@@ -18,7 +18,8 @@ let rootReducer = combineReducers({
     app: AppReducer
 });
 export type BaseThunkType<A extends Action,R = Promise<void>> = ThunkAction< R,AppStateType,unknown,A >
-export type AppStateType = ReturnType<typeof rootReducer>// дай мне возвращаемый тип, и возьми его из rootReducer
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>// дай мне возвращаемый тип, и возьми его из rootReducer
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

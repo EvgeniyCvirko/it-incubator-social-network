@@ -25,20 +25,27 @@ type DispatchPropsType = {
   savePhoto: (file: File) => void
   updateProfile: (profile: ProfileType) => Promise<any>
 }
-
-type MapSateToPropsType = ReturnType<typeof mapSateToProps>
+type MapSateToPropsType = {
+  profile: ProfileType | null
+  status: string
+  myId: number | null
+}
 
 class ProfileContainer extends React.Component<PropsType> {
   constructor(props: PropsType) {
     super(props);
   }
   componentRefresh() {
-    let userId = +this.props.match.params.userId
+    let userId: number | null = +this.props.match.params.userId
     if (!userId) {
       userId = this.props.myId
     }
-    this.props.getProfile(userId)
-    this.props.getUserStatus(userId)
+    if (!userId) {
+      console.error("ID should exists in URI params or in state ('authorizedUserId')");
+    } else {
+      this.props.getProfile(userId)
+      this.props.getUserStatus(userId)
+    }
   }
 
   componentDidMount() {
@@ -67,7 +74,7 @@ class ProfileContainer extends React.Component<PropsType> {
 }
 }
 
-let mapSateToProps = (state: AppStateType) => ({
+const mapSateToProps = (state: AppStateType): MapSateToPropsType => ({
   profile: state.profilePage.profile,
   status: state.profilePage.status,
   myId: state.auth.userId

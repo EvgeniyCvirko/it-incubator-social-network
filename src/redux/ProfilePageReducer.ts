@@ -38,8 +38,8 @@ export type ContactsProfileType ={
     mainLink: string
 }
 export type PhotosProfileType ={
-    small: string
-    large: string
+    small: string | null
+    large: string | null
 }
 
 
@@ -103,7 +103,8 @@ export const profilePageReducer = (state = initialState, action: ActionProfilePa
             return {...state, status: action.status }
         case "SaveAvatarPhoto":
             return {...state,
-               profile:{...state.profile, photos: action.file} }
+               profile:{...state.profile, photos: action.file} as ProfileType}
+        default: return state;
     }
     return state;
 }

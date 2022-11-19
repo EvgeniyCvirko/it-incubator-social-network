@@ -6,7 +6,7 @@ import {BaseThunkType} from "./redux_store";
 export type AuthType = {
   userId: string
   email: string
-  login: string
+  login:  string | null,
   isAuth: boolean
   isLoading: boolean
 }
@@ -15,12 +15,14 @@ type ThunkType = BaseThunkType<ActionAuthType | ReturnType<typeof stopSubmit>>
 //state
 let initialState = {
   isLoading: true,
-  userId: null as (number | null),
+  userId: null as number | null,
   email: null as string | null,
   login: null as string | null,
   isAuth: false,
 }
-export const AuthReducer = (state = initialState, action: ActionAuthType) => {
+
+type InitialStateType = typeof initialState
+export const AuthReducer = (state = initialState, action: ActionAuthType): InitialStateType => {
   switch (action.type) {
     case "SetUserData":
       return {
@@ -29,10 +31,10 @@ export const AuthReducer = (state = initialState, action: ActionAuthType) => {
       };
     case "SetIsAuthLoading":
       return {...state, isLoading: action.isLoading}
+    default: return state;
   }
-  return state;
 }
-export const setUserData = (userId: string, email: string, login: string, isAuth: boolean) => ({
+export const setUserData = (userId: number | null, email: string, login: string, isAuth: boolean) => ({
   type: "SetUserData", data: {userId, email, login, isAuth}
 } as const);
 export const setIsAuthLoading = ({isLoading}: { isLoading: boolean }) => ({
@@ -69,7 +71,7 @@ export const logout = () =>
   async (dispatch: Dispatch<ActionAuthType>) => {
     const data = await authAPI.deleteLogin()
     if (data.resultCode === 0) {
-      dispatch(setUserData('', '', '', false))
+      dispatch(setUserData(null, '', '', false))
     }
   }
 
