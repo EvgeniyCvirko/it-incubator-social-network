@@ -115,17 +115,14 @@ export const savePhoto = (file:File) =>
       if(res.data.resultCode === 0 ) {
           dispatch(setUsersProfile(newProfile))
       }else {
-          const contact = res.data.messages.map(e => e.slice(30, e.length-1).toLowerCase())
-          console.log(contact)
-          //dispatch(stopSubmit('edit-profile', {_error:messages }))
-          /*contact.map((e,i) => {
-              dispatch(stopSubmit('edit-profile', {"contacts": {: res.data.messages[i]} }))
-              console.log({e : res.data.messages[0]})
-              return Promise.reject(res.data.messages[0])
-          })*/
-          dispatch(stopSubmit('edit-profile', {"contacts":{`${contact[0]}` : res.data.messages[0]} }))
-         //return Promise.reject(res.data.messages[0])
-
+          let error = {}
+          res.data.messages.map(e => {
+              const m = e.slice(30, e.length-1).toLowerCase()
+              // @ts-ignore
+              error[`${m}`]  = e
+          })
+          dispatch(stopSubmit('edit-profile', {"contacts":error }))
+         return Promise.reject(res.data.messages)
       }
   }
 
