@@ -1,16 +1,13 @@
-import {authAPI} from "../API/api";
-import {Dispatch} from "redux";
-import {stopSubmit} from "redux-form";
-import {BaseThunkType} from "./redux_store";
+import {authAPI, securityAPI} from '../API/api';
+import {Dispatch} from 'redux';
+import {stopSubmit} from 'redux-form';
+import {BaseThunkType} from './redux_store';
+import {FormDataType} from '../components/Login/LoginForm/LoginForm';
 //type
-export type AuthType = {
-  userId: string
-  email: string
-  login:  string | null,
-  isAuth: boolean
-  isLoading: boolean
-}
-export type ActionAuthType = ReturnType<typeof setUserData> | ReturnType<typeof setIsAuthLoading>
+export type ActionAuthType = ReturnType<typeof setUserData>
+  | ReturnType<typeof setIsAuthLoading>
+  | ReturnType<typeof setCaptcha>
+
 type ThunkType = BaseThunkType<ActionAuthType | ReturnType<typeof stopSubmit>>
 //state
 let initialState = {
@@ -19,6 +16,7 @@ let initialState = {
   email: null as string | null,
   login: null as string | null,
   isAuth: false,
+  captcha: null as string | null
 }
 
 type InitialStateType = typeof initialState
@@ -31,6 +29,8 @@ export const AuthReducer = (state = initialState, action: ActionAuthType): Initi
       };
     case "SetIsAuthLoading":
       return {...state, isLoading: action.isLoading}
+    case 'SetCaptcha':
+      return { ...state, captcha: action.url}
     default: return state;
   }
 }
@@ -39,6 +39,9 @@ export const setUserData = (userId: number | null, email: string, login: string,
 } as const);
 export const setIsAuthLoading = ({isLoading}: { isLoading: boolean }) => ({
   type: "SetIsAuthLoading", isLoading
+} as const);
+export const setCaptcha = (url: string) => ({
+  type: "SetCaptcha", url
 } as const);
 
 export const getAuthentication = () =>
@@ -56,12 +59,15 @@ export const getAuthentication = () =>
 }
 
 
-export const login = (email: string, password: string, rememberMe: boolean): ThunkType =>
+export const login = (data:FormDataType): ThunkType =>
    async (dispatch) => {//need fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    const res = await authAPI.postLogin(email, password, rememberMe)
+    const res = await authAPI.postLogin(data)
         if (res.resultCode === 0) {
           dispatch(getAuthentication())
         } else {
+          if (res.resultCode === 10){
+            dispatch(getCaptcha())
+          }
           const message = res.messages.length > 0 ? res.messages[0] : 'Some error'
           dispatch(stopSubmit('login', {_error: message}))
         }
@@ -73,6 +79,12 @@ export const logout = () =>
     if (data.resultCode === 0) {
       dispatch(setUserData(null, '', '', false))
     }
+  }
+
+export const getCaptcha = () =>
+  async (dispatch: Dispatch<ActionAuthType>) => {
+    const res = await securityAPI.getCaptcha()
+    dispatch(setCaptcha(res.data.url))
   }
 
 
