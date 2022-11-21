@@ -1,5 +1,5 @@
 import React from 'react';
-import './Avatar.css';
+import '../../../common/style/commonStyle.css';
 import {PhotosProfileType} from "../../../../redux/ProfilePageReducer";
 
 type AvatarPropsType ={

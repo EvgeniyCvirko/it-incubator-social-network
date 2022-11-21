@@ -1,8 +1,9 @@
-import React from "react";
-import s from'./Login.module.css'
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../../common/FormControl/FormControl";
-import {required} from "../../../util/valodator/validators";
+import React from 'react';
+import s from './Login.module.css'
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {Input} from '../../common/FormControl/FormControl';
+import {required} from '../../../util/valodator/validators';
+import '../../common/style/commonStyle.css'
 
 export type FormDataType = {
     email: string
