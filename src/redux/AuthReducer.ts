@@ -40,7 +40,7 @@ export const setUserData = (userId: number | null, email: string, login: string,
 export const setIsAuthLoading = ({isLoading}: { isLoading: boolean }) => ({
   type: "SetIsAuthLoading", isLoading
 } as const);
-export const setCaptcha = (url: string) => ({
+export const setCaptcha = (url: string | null) => ({
   type: "SetCaptcha", url
 } as const);
 
@@ -78,6 +78,7 @@ export const logout = () =>
     const data = await authAPI.deleteLogin()
     if (data.resultCode === 0) {
       dispatch(setUserData(null, '', '', false))
+      dispatch(setCaptcha(null))
     }
   }
 
