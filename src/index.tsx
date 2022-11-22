@@ -16,6 +16,8 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById('root'));
 
+
+// for own store
 /*let renderedEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
