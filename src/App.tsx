@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import './App.css';
 import ProfileContainer from "./components/ProfilePage/ProfileContainer";
 import {Footer} from "./components/Footer/Footer";
-import {Route, withRouter,} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter,} from 'react-router-dom';
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {NavContainer} from "./components/Nav/NavContainer";
 import UsersContainer from "./components/Users/UsersContainer";
@@ -40,13 +40,17 @@ class App extends React.Component< ComponentType,mapDispatchToPropsPropsType> {
                 <HeaderContainer/>
                 <NavContainer/>
                 <div className='content'>
-                    <Route path='/message' render={() => <Suspense fallback={<div>Loading...</div>}>
-                      <DialogsContainer/>
-                    </Suspense>}/>
-                  {/*<Route path='/message' render={() => <DialogsContainer/>}/>*/}
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/login' render={() => <LoginContainer/>}/>
+                  <Switch>
+                    <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
+                    <Route path="/message" render={() => <Suspense fallback={<div>Loading...</div>}>
+                    <DialogsContainer/>
+                  </Suspense>}/>
+                    {/*<Route path='/message' render={() => <DialogsContainer/>}/>*/}
+                    <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                    <Route path="/users" render={() => <UsersContainer/>}/>
+                    <Route path="/login" render={() => <LoginContainer/>}/>
+                    <Route path="*" render={() => <div>404 NOT FOUND</div>}/>
+                  </Switch>
                 </div>
                 <Footer/>
             </div>
