@@ -1,16 +1,17 @@
 import {getAuthentication} from "./AuthReducer";
 import {BaseThunkType} from "./redux_store";
 //types
-export type AppType = {
-    initialised: boolean
-}
+type InitialStateType = typeof initialState
 export type ActionAppType = ReturnType<typeof initialisedSuccess>
+type ThunkType = BaseThunkType<ActionAppType>
+
+//state
 let initialState = {
     initialised: false,
 }
-type ThunkType = BaseThunkType<ActionAppType>
+
 //Component
-export const AppReducer = (state: AppType = initialState, action: ActionAppType) => {
+export const AppReducer = (state = initialState, action: ActionAppType):InitialStateType => {
     switch (action.type) {
         case "INITIALISED-STATE":
             return {
