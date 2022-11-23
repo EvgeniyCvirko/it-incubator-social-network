@@ -1,13 +1,14 @@
-import {authAPI, securityAPI} from '../API/api';
 import {Dispatch} from 'redux';
 import {stopSubmit} from 'redux-form';
 import {BaseThunkType} from './redux_store';
 import {FormDataType} from '../components/Login/LoginForm/LoginForm';
+import {authAPI} from '../API/auth-api';
+import {securityAPI} from '../API/security-api';
 //type
 export type ActionAuthType = ReturnType<typeof setUserData>
   | ReturnType<typeof setIsAuthLoading>
   | ReturnType<typeof setCaptcha>
-
+type InitialStateType = typeof initialState
 type ThunkType = BaseThunkType<ActionAuthType | ReturnType<typeof stopSubmit>>
 //state
 let initialState = {
@@ -18,8 +19,7 @@ let initialState = {
   isAuth: false,
   captcha: null as string | null
 }
-
-type InitialStateType = typeof initialState
+//reducers
 export const AuthReducer = (state = initialState, action: ActionAuthType): InitialStateType => {
   switch (action.type) {
     case "SetUserData":
@@ -34,6 +34,7 @@ export const AuthReducer = (state = initialState, action: ActionAuthType): Initi
     default: return state;
   }
 }
+//actions
 export const setUserData = (userId: number | null, email: string, login: string, isAuth: boolean) => ({
   type: "SetUserData", data: {userId, email, login, isAuth}
 } as const);
@@ -43,7 +44,7 @@ export const setIsAuthLoading = ({isLoading}: { isLoading: boolean }) => ({
 export const setCaptcha = (url: string | null) => ({
   type: "SetCaptcha", url
 } as const);
-
+//thunks
 export const getAuthentication = () =>
   async (dispatch: Dispatch<ActionAuthType>) => {
     dispatch(setIsAuthLoading({isLoading: true}))
@@ -57,7 +58,6 @@ export const getAuthentication = () =>
       dispatch(setIsAuthLoading({isLoading: false}))
     }
 }
-
 
 export const login = (data:FormDataType): ThunkType =>
    async (dispatch) => {//need fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
