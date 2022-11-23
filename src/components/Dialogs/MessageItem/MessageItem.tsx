@@ -1,5 +1,6 @@
 import c from "../Dialogs.module.css";
-import {MessagesData} from "../../../redux/DialoguesPageReducer";
+import {MessagesData} from '../../../types/types';
+
 export type MessageItemPropsType={
     messagesData:Array<MessagesData>
 }

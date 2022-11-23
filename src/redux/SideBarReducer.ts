@@ -1,19 +1,11 @@
 import {v1} from "uuid";
-
+import {FriendsType, List} from '../types/types';
+//types
 export type SideBarType = {
     list: Array<List>,
     friends: Array<FriendsType>,
 }
-type List = {
-    id: string,
-    namePage: string,
-}
-export type FriendsType = {
-    id: string
-    avatar: string,
-    name: string,
-}
-
+//state
 let initialState = {
     list: [
         {id: v1(), namePage: 'Profile'},
@@ -29,8 +21,7 @@ let initialState = {
         { id:v1(), avatar: 'https://cdn-0.emojis.wiki/emoji-pics/twitter/orange-circle-twitter.png', name: "Dima"},
     ],
 }
-
+//reducers
 export const sideBarReducer = (state: SideBarType = initialState, action: any ): SideBarType=> {
-
     return state;
 }
