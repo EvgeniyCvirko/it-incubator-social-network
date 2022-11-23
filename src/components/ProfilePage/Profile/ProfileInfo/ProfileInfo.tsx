@@ -2,8 +2,8 @@ import React from 'react';
 
 import smileNo from './../../../../img/ProfilePage/Profile/smileNo.jpg'
 import smileYes from './../../../../img/ProfilePage/Profile/smileYes.jpg'
-import {ContactsProfileType, ProfileType} from '../../../../redux/ProfilePageReducer';
 import {Contacts} from './Contacts/Contacts';
+import {ContactsProfileType, ProfileType} from '../../../../types/types';
 
 type ProfileInfoPropsType = {
   profile: ProfileType

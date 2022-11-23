@@ -2,10 +2,10 @@ import React, {ChangeEvent, useState} from 'react';
 import s from './Profile.module.css';
 import {Avatar} from './Avatar/Avatar';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {ProfileType} from '../../../redux/ProfilePageReducer';
 import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 import {ProfileInfoEditForm} from './ProfileInfo/ProfileInfoEdit';
 import {Loading} from '../../common/Loading';
+import {ProfileType} from '../../../types/types';
 
 type ProfilePropsType = {
   profile: ProfileType | null

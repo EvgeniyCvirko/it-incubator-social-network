@@ -1,44 +1,12 @@
 import {
     addPostAC,
-    ContactsProfileType,
-    PhotosProfileType, PostsType,
-    profilePageReducer, ProfileType,
+    profilePageReducer,
     setUsersProfile,
     setUserStatus
 } from './ProfilePageReducer';
 import {v1} from "uuid";
+import {ContactsProfileType, PhotosType, PostsType, ProfileType} from '../types/types';
 
-// let startState ={
-//     posts: [
-//         {id: v1(), message: 'Hey, why nobody love me?', count: 100},
-//         {id: v1(), message: 'I want to be Front-end-Developer!!!', count: 500},
-//         {id: v1(), message: 'Ho-ho-ho', count: 50},
-//     ],
-//     profile: {
-//         userId: 1,
-//         lookingForAJob: true,
-//         lookingForAJobDescription: '',
-//         fullName: 'Evgeniy Cvirko',
-//         aboutMe: '111',
-//         contacts:{
-//             github: 'https://github.com/EvgeniyCvirko',
-//             vk: 'https://vk.com',
-//             facebook: '',
-//             instagram: '@EvgeniyCvirko',
-//             twitter: '',
-//             website: '',
-//             youtube: '',
-//             mainLink: '',
-//         },
-//         photos: {
-//             small:'https://cdn.vectorstock.com/i/1000x1000/38/17/male-face-avatar-logo-template-pictograph-vector-11333817.webp',
-//             large:'',
-//         }
-//
-//     },
-//     newPostText: '',
-//     status: '',
-// }
 let startState ={
     posts: [
         {id: v1(), message: 'Hey, why nobody love me?', count: 100},
@@ -70,7 +38,7 @@ test('Profile should be after set users', () =>{
         fullName: "Alex",
         aboutMe: '111',
         contacts:{} as ContactsProfileType,
-        photos: {} as PhotosProfileType,
+        photos: {} as PhotosType,
     }
     const action = setUsersProfile(user)
     const endState = profilePageReducer(startState, action)

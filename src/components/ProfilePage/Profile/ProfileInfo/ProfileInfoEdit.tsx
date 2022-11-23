@@ -1,9 +1,9 @@
 import React from 'react';
 import './ProfileInfo.css'
-import {ProfileType} from '../../../../redux/ProfilePageReducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input, Textarea} from '../../../common/FormControl/FormControl';
 import {required} from '../../../../util/valodator/validators';
+import {ProfileType} from '../../../../types/types';
 
 type ProfileInfoPropsType = {
   profile: ProfileType
