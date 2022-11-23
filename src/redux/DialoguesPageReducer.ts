@@ -1,21 +1,8 @@
 import {v1} from "uuid";
-
-export type DialogsPageType = {
-    dialogsData: Array<DialogsDataType>,
-    messagesData: Array<MessagesData>,
-    newMessage: string,
-}
-export type DialogsDataType = {
-    id: number,
-    name: string,
-}
-export type MessagesData = {
-    id: string,
-    message: string,
-}
-type ActionTypeDialogsPage =
-    ReturnType<typeof AddMessageAC>
-const Add_Message = 'Add_Message';
+import {DialogsPageType} from '../types/types';
+//type
+type ActionTypeDialogsPage = ReturnType<typeof AddMessageAC>
+//state
 let initialState = {
     dialogsData: [
         {id: 1, name: 'Sasha'},
@@ -34,10 +21,10 @@ let initialState = {
     ],
     newMessage: '',
 }
-
-export const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionTypeDialogsPage) => {
+//reducers
+export const dialogsPageReducer = (state = initialState, action: ActionTypeDialogsPage): DialogsPageType => {
         switch (action.type) {
-            case Add_Message: {
+            case 'Add-Message': {
                 let newMessage = {
                     id: v1(), message: action.message
                 }
@@ -49,9 +36,10 @@ export const dialogsPageReducer = (state: DialogsPageType = initialState, action
         }
     return state;
 }
+//actions
 export const AddMessageAC = (message: string) => {
     return {
-        type: "Add_Message",
+        type: "Add-Message",
         message: message
     } as const
 }

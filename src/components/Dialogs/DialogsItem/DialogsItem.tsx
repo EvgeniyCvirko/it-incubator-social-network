@@ -1,7 +1,7 @@
 import c from "../Dialogs.module.css";
 import {NavLink} from "react-router-dom";
 import React from "react";
-import {DialogsDataType} from "../../../redux/DialoguesPageReducer";
+import {DialogsDataType} from '../../../types/types';
 
 type DialogsItemPropsType={
      dialogsData: Array<DialogsDataType>,

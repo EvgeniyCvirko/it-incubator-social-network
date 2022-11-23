@@ -1,10 +1,11 @@
-import {AddMessageAC, DialogsPageType} from "../../redux/DialoguesPageReducer";
+import {AddMessageAC} from "../../redux/DialoguesPageReducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux_store";
 import {compose, Dispatch} from "redux";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import React from "react";
+import {DialogsPageType} from '../../types/types';
 
 type MapStateToPropsType = {
     items: DialogsPageType
