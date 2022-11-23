@@ -1,7 +1,7 @@
 import React from 'react';
-import {UsersType} from '../../redux/UsersReducer';
 import {Pagination} from '../common/pagination/Pagination';
 import {User} from './User/User';
+import {UsersType} from '../../types/types';
 
 export type UsersPropsType = {
   users: UsersType[]

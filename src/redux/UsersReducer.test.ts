@@ -1,11 +1,10 @@
 import {
     changeFollowed,
     changeUnFollowed,
-    LocationType,
-    PhotosType, setCurrentPage, setFollowingInProgress, setIsFetching, setTotalUsersCount, setUsers,
+    setCurrentPage, setFollowingInProgress, setIsFetching, setTotalUsersCount, setUsers,
     usersPageReducer,
-    UsersPageType
 } from "./UsersReducer";
+import {LocationType, PhotosType} from '../types/types';
 
 const user1 = {
     id: '1',
@@ -24,8 +23,8 @@ const user2 = {
     status: 'Old',
     location: {} as LocationType,
 }
-let startState: UsersPageType ={
-    users: [user1,user2 ],
+let startState ={
+    users: [user1,user2],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,

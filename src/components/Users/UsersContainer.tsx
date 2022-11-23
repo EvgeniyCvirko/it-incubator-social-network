@@ -2,7 +2,7 @@ import {AppStateType} from "../../redux/redux_store";
 import {connect} from "react-redux";
 import {
     setCurrentPage,
-    UsersType, setFollowingInProgress, requestUsers, followUser, unFollowUser,
+    setFollowingInProgress, requestUsers, followUser, unFollowUser,
 } from "../../redux/UsersReducer";
 import {Users} from "./Users";
 import React from "react";
@@ -17,6 +17,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/UsersSelectors";
+import {UsersType} from '../../types/types';
 
 type MapSateToPropsType = {
     users: UsersType[]

@@ -1,34 +1,11 @@
 import React from 'react';
-import {ResponseType, usersAPI} from '../API/api';
+import {ResponseType} from '../API/api';
 import {Dispatch} from "redux";
+import {usersAPI} from '../API/user-api';
+import {UsersType} from '../types/types';
 
-
-export type UsersPageType ={
-    users: UsersType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: Array<string>
-}
-export type UsersType = {
-    id: string
-    photos: PhotosType
-    followed: boolean
-    name: string
-    status: string
-    location: LocationType
-}
-export type PhotosType = {
-    small:string | null
-    large:string | null
-}
-export type LocationType = {
-    country: string,
-    city: string,
-}
-
-
+//types
+type InitialStateType = typeof initialState
 export type ActionUsersPageType = ReturnType<typeof changeFollowed>
     | ReturnType<typeof changeUnFollowed>
     | ReturnType<typeof setUsers>
@@ -36,17 +13,17 @@ export type ActionUsersPageType = ReturnType<typeof changeFollowed>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof setIsFetching>
     | ReturnType<typeof setFollowingInProgress>
-
+//state
 let initialState = {
-    users: [],
+    users: [] as UsersType[],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: [],
+    followingInProgress: [] as Array<string>,
 }
-
-export const usersPageReducer = (state: UsersPageType = initialState, action: ActionUsersPageType):UsersPageType => {
+//reducers
+export const usersPageReducer = (state = initialState, action: ActionUsersPageType):InitialStateType => {
     switch (action.type) {
         case "Follow" :
             return {
@@ -76,6 +53,7 @@ export const usersPageReducer = (state: UsersPageType = initialState, action: Ac
             return state;
     }
 }
+//actions
 export const changeFollowed = (IdUser: string) => ({type: "Follow", IdUser} as const);
 export const changeUnFollowed = (IdUser: string) => ({type: "UnFollow", IdUser} as const);
 export const setCurrentPage = (currentPage: number) => ({type: "SetCurrentPage", currentPage} as const);
@@ -83,7 +61,7 @@ export const setTotalUsersCount = (count: number) => ({type: "SetTotalUsersPage"
 export const setIsFetching = (isFetching: boolean) => ({type: "SetToggleFetching", isFetching} as const);
 export const setFollowingInProgress = ( userId:string, isFollowing: boolean) => ({type: "SetFollowingInProgress", userId, isFollowing} as const);
 export const setUsers = (users: UsersType[]) => ({type: "SetUsers", users} as const);
-
+//thunks
 export const requestUsers = (currentPage: number, pageSize: number) =>
     async (dispatch: Dispatch<ActionUsersPageType>) => {
         dispatch(setIsFetching(true))
