@@ -35,13 +35,14 @@ class ProfileContainer extends React.Component<PropsType> {
   constructor(props: PropsType) {
     super(props);
   }
+
   componentRefresh() {
     let userId: number | null = +this.props.match.params.userId
     if (!userId) {
       userId = this.props.myId
     }
     if (!userId) {
-      console.error("ID should exists in URI params or in state ('authorizedUserId')");
+      console.error('ID should exists in URI params or in state (\'authorizedUserId\')');
     } else {
       this.props.getProfile(userId)
       this.props.getUserStatus(userId)
@@ -57,21 +58,21 @@ class ProfileContainer extends React.Component<PropsType> {
       this.componentRefresh()
     }
   }
+
   componentWillUnmount(): void {
   }
 
 
-  render()
-{
-  return <ProfilePage {...this.props}
-                      profile={this.props.profile}
-                      status={this.props.status}
-                      updateStatus={this.props.updateUserStatus}
-                      isOwn={!this.props.match.params.userId}
-                      savePhoto={this.props.savePhoto}
-                      updateProfile={this.props.updateProfile}
-  />
-}
+  render() {
+    return <ProfilePage {...this.props}
+                        profile={this.props.profile}
+                        status={this.props.status}
+                        updateStatus={this.props.updateUserStatus}
+                        isOwn={!this.props.match.params.userId}
+                        savePhoto={this.props.savePhoto}
+                        updateProfile={this.props.updateProfile}
+    />
+  }
 }
 
 const mapSateToProps = (state: AppStateType): MapSateToPropsType => ({
